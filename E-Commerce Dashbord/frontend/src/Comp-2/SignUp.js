@@ -59,7 +59,8 @@ function SignUp() {
                     console.log(event.target.value);
                 }} />
 
-            <button onClick={collectDate} type="submit">Submit</button>
+      <button onClick={collectDate} type="submit">Submit</button>
+            
         </div>
     )
 }
