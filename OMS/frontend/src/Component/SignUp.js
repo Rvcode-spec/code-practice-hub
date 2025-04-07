@@ -20,9 +20,10 @@ const SignUp = () => {
       const result = await response.json();
 
       if (result && result._id) {
-        // ✅ Store user in localStorage
-        localStorage.setItem("user", JSON.stringify(result));
-        navigate('/');
+        // ✅ Store user as 'admin' for consistency with Nav component
+        localStorage.setItem("admin", JSON.stringify(result));
+        localStorage.setItem("token", result.token); // optional, if you return token
+        navigate('/home'); // redirect to home after signup
       } else {
         alert("Signup failed");
       }
