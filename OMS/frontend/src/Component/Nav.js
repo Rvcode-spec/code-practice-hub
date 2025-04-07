@@ -1,11 +1,22 @@
 import React, { useState } from 'react';
 import Login from './Login';
 import SignUp from './SignUp';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
-const App = () => {
+const App = ({admin, setAdmin}) => {
     const [showLogin, setShowLogin] = useState(false);
     const [showSignUp, setShowSignUp] = useState(false);
+    const navigate = useNavigate()
+  
+
+
+    const logout = () => {
+        setAdmin(null);
+        navigate('/login')
+        // localStorage.clear();
+        console.log("Logout");
+    
+      }
 
     return (
         <>
@@ -20,11 +31,13 @@ const App = () => {
                                 <Link className="nav-link active ms-5" to="/home" >Home</Link>
                             </li>
                             <li className="nav-item">
-                                <Link className='nav-link active ms-5' to="Home">Data List</Link>
+                                <Link className='nav-link active ms-5' to="/data">Data List</Link>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link active ms-5" to="/home">Add Data</Link>
+                                <Link className="nav-link active ms-5" to="/adddata">Add Data</Link>
                             </li>
+                            <li>
+                                <button onClick={logout}>Log Out ({admin?.name})</button></li>
                         </ul>
                     </div>
                     <div className="d-flex gap-3">

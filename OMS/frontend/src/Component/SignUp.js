@@ -1,20 +1,11 @@
 import React, { useState } from 'react';
-import { useNavigate } from "react-router-dom"; 
+import {useNavigate} from 'react-router-dom'
 
 const SignUp = () => {
-  
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const navigate = useNavigate(); 
-
-  const handleLogin = (e) => {
-    e.preventDefault();
-    console.log('Name:', name);
-    console.log('Email:', email);
-    console.log('Password:', password);
-    // Login logic yaha add karo
-  };
+  const navigate = useNavigate('')
 
   const collectDate = async () =>{
     console.log(name, email, password);
@@ -28,8 +19,9 @@ const SignUp = () => {
     });
     result = await result.json();
     console.log(result);
-    if (result && result._id) {
-      navigate('/');
+    if(result && result._id){
+      // setAdmin(result);
+      navigate('/')
     }
   }
 
@@ -37,7 +29,7 @@ const SignUp = () => {
     <div className="container d-flex justify-content-center align-items-center vh-100">
       <div className="card p-4 shadow" style={{ width: '100%', maxWidth: '400px' }}>
         <h3 className="text-center mb-4">Sign Up</h3>
-        <form onSubmit={handleLogin}>
+        <form>
           <div className="mb-3">
             <label className="form-label">Name</label>
             <input
