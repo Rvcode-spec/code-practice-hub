@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
 
@@ -6,6 +6,7 @@ export default function Nav() {
   const auth = localStorage.getItem('user')
   const user = auth && auth !== 'undefined' ? JSON.parse(auth) : null;
   const navigate = useNavigate();
+
 
   const logout = () => {
     navigate('/signup')

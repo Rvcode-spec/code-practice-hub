@@ -1,45 +1,50 @@
 import React, { useState } from 'react';
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
 
 const SignUp = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const navigate = useNavigate('')
+  const navigate = useNavigate();
 
-  const collectDate = async () =>{
-    console.log(name, email, password);
+  const collectData = async () => {
+    try {
+      const response = await fetch("http://localhost:5000/signup", {
+        method: 'POST',
+        headers: {
+          'Content-Type': "application/json",
+        },
+        body: JSON.stringify({ name, email, password })
+      });
 
-    let result = await fetch("http://localhost:5000/signup",{
-      method:'POST',
-      body: JSON.stringify({ name, email, password }),
-      headers:{
-        'Content-Type': "application/json",
+      const result = await response.json();
+
+      if (result && result._id) {
+        // ✅ Store user in localStorage
+        localStorage.setItem("user", JSON.stringify(result));
+        navigate('/');
+      } else {
+        alert("Signup failed");
       }
-    });
-    result = await result.json();
-    console.log(result);
-    if(result && result._id){
-      // setAdmin(result);
-      navigate('/')
+    } catch (error) {
+      console.error("Error during signup:", error);
     }
-  }
+  };
 
   return (
     <div className="container d-flex justify-content-center align-items-center vh-100">
       <div className="card p-4 shadow" style={{ width: '100%', maxWidth: '400px' }}>
         <h3 className="text-center mb-4">Sign Up</h3>
-        <form>
+        <form onSubmit={(e) => e.preventDefault()}>
           <div className="mb-3">
             <label className="form-label">Name</label>
             <input
-              type="Name"
+              type="text"
               className="form-control"
               value={name}
               onChange={(e) => setName(e.target.value)}
               required
             />
-
           </div>
           <div className="mb-3">
             <label className="form-label">Email address</label>
@@ -51,7 +56,6 @@ const SignUp = () => {
               required
             />
           </div>
-
           <div className="mb-3">
             <label className="form-label">Password</label>
             <input
@@ -62,9 +66,12 @@ const SignUp = () => {
               required
             />
           </div>
-
-          <button type="submit"  className="btn btn-primary w-100" onClick={collectDate}>
-            Login
+          <button
+            type="button"
+            className="btn btn-primary w-100"
+            onClick={collectData}
+          >
+            Sign Up
           </button>
         </form>
       </div>
