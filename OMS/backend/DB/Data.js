@@ -1,8 +1,12 @@
-const mongoose = require('mongoose')
-const DataSchema = new mongoose.Schema({
-    name:String,
-    email:String,
-    password:String
-})
+const mongoose = require('mongoose');
 
-module.exports = mongoose.model('datas', DataSchema)
+const DataSchema = new mongoose.Schema({
+    Company: String,
+    Address: String,
+    Material: String,
+    QRT: Number,
+    Reta: Number,
+    adminId: String // 👈 VERY IMPORTANT
+});
+
+module.exports = mongoose.model('datas', DataSchema);

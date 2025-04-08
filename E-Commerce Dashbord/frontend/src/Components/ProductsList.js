@@ -7,7 +7,7 @@ export default function ProductsList() {
     useEffect(() => {
         getProducts();
 
-    }, [])
+    }, [])  
 
     const getProducts = async () => {
         let result = await fetch('http://localhost:5000/products',{

@@ -1,4 +1,14 @@
-<div className="mt-4">
-        {showLogin && <Login />}
-        {showSignUp && <SignUp />}
-      </div>
+
+
+
+const handleAdd = (e) => {
+    e.preventDefault();
+    setTableData(prev => [...prev, formData]);
+    setFormData({
+      company: '',
+      address: '',
+      material: '',
+      qrt: '',
+      reta: ''
+    });
+  };

@@ -1,40 +1,55 @@
 import React, { useState } from 'react';
 
 const AddData = () => {
-  const [formData, setFormData] = useState({
-    company: '',
-    address: '',
-    material: '',
-    qrt: '',
-    reta: ''
-  });
+  const [Company, setCompany] = useState('');
+  const [Address, setAddress] = useState('');
+  const [Material, setMaterial] = useState('');
+  const [QRT, setQRT] = useState('');
+  const [Reta, setReta] = useState('');
+  const [error, setError] = useState(false);
 
-  const [tableData, setTableData] = useState([]);
+  const handleAdd = async (e) => {
+    e.preventDefault(); // prevent default form submission
 
-  // Handle input changes
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-  };
+    if (!Company || !Address || !Material || !QRT || !Reta) {
+      setError(true);
+      return;
+    }
 
-  // Add data to table
-  const handleAdd = (e) => {
-    e.preventDefault();
-    setTableData(prev => [...prev, formData]);
-    setFormData({
-      company: '',
-      address: '',
-      material: '',
-      qrt: '',
-      reta: ''
-    });
-  };
+    const admin = JSON.parse(localStorage.getItem("admin") || "{}");
+    const userId = admin._id;
 
-  // Delete row
-  const handleDelete = (index) => {
-    const updatedData = [...tableData];
-    updatedData.splice(index, 1);
-    setTableData(updatedData);
+    if (!userId) {
+      console.error("Admin not found or invalid");
+      return;
+    }
+
+    try {
+      const response = await fetch("http://localhost:5000/adddata", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ Company, Address, Material, QRT, Reta, adminId:userId }),
+      });
+
+      const text = await response.text();
+      console.log("Raw response:", text);
+
+      const result = JSON.parse(text);
+      console.log("Product added successfully:", result);
+
+      // Clear fields
+      setCompany('');
+      setAddress('');
+      setMaterial('');
+      setQRT('');
+      setReta('');
+      setError(false);
+
+    } catch (error) {
+      console.error("Error while adding product:", error);
+    }
   };
 
   return (
@@ -43,60 +58,56 @@ const AddData = () => {
 
       <form onSubmit={handleAdd} className="row g-3 mb-4">
         <div className="col-md-4">
-          <input type="text" className="form-control" name="company" placeholder="Company Name" value={formData.company} onChange={handleChange} required />
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Company Name"
+            value={Company}
+            onChange={(e) => setCompany(e.target.value)}
+          />
         </div>
         <div className="col-md-4">
-          <input type="text" className="form-control" name="address" placeholder="Address" value={formData.address} onChange={handleChange} required />
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Address"
+            value={Address}
+            onChange={(e) => setAddress(e.target.value)}
+          />
         </div>
         <div className="col-md-4">
-          <input type="text" className="form-control" name="material" placeholder="Material" value={formData.material} onChange={handleChange} required />
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Material"
+            value={Material}
+            onChange={(e) => setMaterial(e.target.value)}
+          />
         </div>
         <div className="col-md-2">
-          <input type="text" className="form-control" name="qrt" placeholder="QRT" value={formData.qrt} onChange={handleChange} required />
+          <input
+            type="text"
+            className="form-control"
+            placeholder="QRT"
+            value={QRT}
+            onChange={(e) => setQRT(e.target.value)}
+          />
         </div>
         <div className="col-md-2">
-          <input type="text" className="form-control" name="reta" placeholder="Reta" value={formData.reta} onChange={handleChange} required />
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Reta"
+            value={Reta}
+            onChange={(e) => setReta(e.target.value)}
+          />
         </div>
         <div className="col-md-2">
           <button type="submit" className="btn btn-success w-100">Add</button>
         </div>
       </form>
 
-      {/* Data Table */}
-      <table className="table table-bordered border-primary mt-3">
-        <thead>
-          <tr>
-            <th>S.No</th>
-            <th>Company Name</th>
-            <th>Address</th>
-            <th>Material</th>
-            <th>QRT</th>
-            <th>Reta</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {tableData.length === 0 ? (
-            <tr>
-              <td colSpan="7" className="text-center">No data added yet</td>
-            </tr>
-          ) : (
-            tableData.map((item, index) => (
-              <tr key={index}>
-                <td>{index + 1}</td>
-                <td>{item.company}</td>
-                <td>{item.address}</td>
-                <td>{item.material}</td>
-                <td>{item.qrt}</td>
-                <td>{item.reta}</td>
-                <td>
-                  <button className="btn btn-danger btn-sm" onClick={() => handleDelete(index)}>Delete</button>
-                </td>
-              </tr>
-            ))
-          )}
-        </tbody>
-      </table>
+      {error && <p className="text-danger">* Please fill all fields correctly.</p>}
     </div>
   );
 };

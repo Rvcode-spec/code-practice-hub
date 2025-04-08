@@ -51,6 +51,42 @@ const jwtkey = 'OMS'
 });
     
 
+
+server.post("/adddata", async (req , resp)=>{
+  console.log("Received Data:", req.body);
+  let Adddata = new Data(req.body);
+  let result = await Adddata.save();
+  resp.send(result);
+
+})
+
+server.get("/data", async (req, res) => {
+  try {
+    const adminId = req.query.adminId;
+    if (!adminId) {
+      return res.status(400).json({ message: "adminId is required" });
+    }
+
+    const data = await Data.find({ adminId });
+    res.json(data);
+  } catch (err) {
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
+
+
+server.delete('/data/:id', async (req, res) => {
+  try {
+    const result = await Data.deleteOne({ _id: req.params.id });
+    res.send(result);
+  } catch (err) {
+    res.status(500).send({ error: "Failed to delete data" });
+  }
+});
+
+
+
  server.listen(5000,()=>{
     console.log("Server Start");
     
