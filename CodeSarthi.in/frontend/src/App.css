@@ -1,0 +1,44 @@
+.body{
+
+    /* background: linear-gradient(90deg,rgba(2, 0, 36, 1) 0%,
+     rgba(9, 9, 121, 1) 0%, rgba(6, 87, 172, 1) 37%, rgba(0, 212, 255, 1) 100%); */
+     background-color: #6E69D1;
+     
+}
+.logo{
+    display: flex;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    margin: 5px;
+}
+
+.Button{
+    background-color: #3FABE0;
+    border: none;
+}
+.Button:hover{
+    
+    background-color: #833AB4;
+}
+
+.Cardimg{
+    width: 200px;
+    height: 200px;
+    margin-left: 50px;
+}
+
+ .main-color{
+    background: linear-gradient(to bottom, #1f2b4c, #2e3d66, #435b99);
+    color: #fff;
+   
+
+}
+
+.footer-color{
+
+    background-color: #833AB4;
+    color: #fff;
+    bottom: 0;
+}
+
