@@ -6,11 +6,11 @@ const Nav = () => {
   const auth = localStorage.getItem('admin');
   const admin = auth && auth !== 'undefined' ? JSON.parse(auth) : null;
 
-  const logout = () => {
-    localStorage.removeItem('admin');
-    localStorage.removeItem('token');
-    navigate('/login'); // Redirect to login page after logout
-  };
+    const logout = () => {
+      localStorage.removeItem('admin');
+      localStorage.removeItem('token');
+      navigate('/login'); // Redirect to login page after logout
+    };
 
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark px-4">

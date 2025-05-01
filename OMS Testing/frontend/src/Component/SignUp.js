@@ -18,15 +18,14 @@ const SignUp = () => {
       });
 
       const result = await response.json();
-
-      if (result && result._id) {
-        // ✅ Store user as 'admin' for consistency with Nav component
-        localStorage.setItem("admin", JSON.stringify(result));
-        localStorage.setItem("token", result.token); // optional, if you return token
-        navigate('/home'); // redirect to home after signup
+      if (result && (result.id || result._id)) {
+        localStorage.setItem("user", JSON.stringify(result));
+        localStorage.setItem("token", result.token || "");
+        navigate("/");
       } else {
-        alert("Signup failed");
+        alert("Registration failed. Please try again.");
       }
+      
     } catch (error) {
       console.error("Error during signup:", error);
     }
