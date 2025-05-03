@@ -7,7 +7,7 @@ import Card from "react-bootstrap/Card";
 import CardimgHtml from "./img/HTML.png";
 import CardimgCss from "./img/CSS.svg";
 import CardimgJs from "./img/JS.png"; // Add your own images
-import Textlogo from "./img/textlogo.png";
+import Textlogo from "./img/code.svg";
 
 const statsData = [
   {
@@ -41,29 +41,44 @@ export default function Home() {
     <div>
 
 
-<div className="container-fluid main-color ">
-  <div className=" row align-items-center">
-    
-    {/* Left Side Text */}
-    <div className="col-6 p-5">
-      <h1>यहाँ आपका Text आएगा</h1>
+<div className="container-fluid main-color " >
+      <div className="row">
+        {/* Text Content */}
+        <div className="col-md-6">
+          <h4><strong>CodeSarthi</strong></h4>
+          <p>⭐ 4.6 | 654+ Students</p>
+          <p>
+            Katalon is a modern, comprehensive quality management platform that helps teams
+            of any size deliver the highest quality digital experiences. It is a free test
+            automation platform that can be used to automate online, mobile, and API testing.
+            Built on top of the main libraries of Selenium and Appium. It includes a
+            user-friendly interface that allows users to easily develop, run, and maintain tests.
+          </p>
+
+          {/* <div className="d-flex flex-wrap gap-4 mb-3">
+            <div>📅 <strong>Duration:</strong> 45 days</div>
+            <div>👨‍🎓 <strong>Students Enrolled:</strong> 654+ Students</div>
+            <div>🧑‍💻 <strong>Course Type:</strong> Online / Offline</div>
+          </div>
+
+          <div className="d-flex gap-3">
+            <button className="btn btn-dark">Enroll Now</button>
+            <button className="btn btn-outline-dark">Get a Free Demo</button>
+          </div> */}
+        </div>
+
+        {/* Image Section */}
+        <div className="col-md-6">
+          <img
+            src={Textlogo} // your image path
+            alt="Katalon Course"
+            className="img-fluid image-area image-area::after"
+           
+          />
+        </div>
+      </div>
     </div>
 
-    {/* Right Side Image */}
-    <div className="col-6 d-flex justify-content-end">
-      <img 
-        src={Textlogo} 
-        alt="Logo"
-        className="img-fluid w-50 object-fit-contain rounded"
-        style={{ 
-          objectFit: 'contain', 
-          transform: 'rotate(0deg)'   // 👈 यहाँ rotation जोड़ दिया
-        }}
-      />
-    </div>
-
-  </div>
-</div>
 
 
 {/* images  */}

@@ -7,7 +7,6 @@ export default function Home() {
    <div>
       <h1 className="bg-amber-600">Ravi</h1>
       <Button>click</Button>
-
       <UserButton/>
    </div>
   );
