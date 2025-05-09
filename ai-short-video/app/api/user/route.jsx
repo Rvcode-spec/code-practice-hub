@@ -1,20 +1,24 @@
+// app/api/user/route.js
 import generateContent from "@/configs/AiModel";
-import streamContent from "@/configs/AiModel";
-// import response from "@/configs/AiModel";
 import { NextResponse } from "next/server";
+ // make sure this path is correct
 
 export async function POST(req) {
   try {
-    const { prompt } = await req.json();
+    const body = await req.json();
+    const { prompt } = body;
     console.log("Received prompt:", prompt);
 
-    const result = await generateContent.sendMessage(prompt)
-    console.log(chunk.text)
-    return NextResponse.json({'result': JSON.parse(chunk.text)})
-    
+    if (!prompt) {
+      return NextResponse.json({ error: "Prompt is required" }, { status: 400 });
+    }
 
-    // const chatSession = await model.startChat();
-  }catch(e){
-    return NextResponse.json({'Error:': e})
+    const result = await generateContent(prompt);
+    console.log(result);
+    
+    return NextResponse.json({ result });
+  } catch (err) {
+    console.error("❌ API Error:", err.message || err);
+    return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
   }
 }

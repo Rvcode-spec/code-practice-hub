@@ -36,14 +36,11 @@ export default function CreateNew() {
 
     setLoading(true);
     const prompt = `Write a script to generate ${duration} seconds video on topic: ${topic} along with AI image prompt in ${imageStyle} format for each scene and give me result in JSON format with imagePrompt and ContentText as field`;
-    console.log("Prompt:", prompt);
-    const result= await axios.post('/api/user',{
-      prompt:prompt
-    }).then(resp=>{
-      console.log(resp.data);
-      
-    })
-    
+    console.log("prompt:", prompt);
+    const result = await axios.post('/api/user', {
+      prompt: prompt
+    });
+    setVideoScript(result.data.result);
     setLoading(false);
   };
 
