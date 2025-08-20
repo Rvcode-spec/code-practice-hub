@@ -1,27 +1,21 @@
 const express = require('express');
 const dotenv = require('dotenv');
-const cors = require('cors')
-const pool = require("./config/db");
-
-
 dotenv.config();
+const cors = require('cors');
+const { createCompanyTable } = require('./modules/companySchema');
+
 const server = express();
 server.use(cors());
 server.use(express.json());
 
-server.get("/", async (req, res) => {
-  try {
-    const result = await pool.query("SELECT NOW()");
-    res.send("✅ Database connected! Time: " + result.rows[0].now);
-  } catch (err) {
-    res.send("❌ Database error: " + err.message);
-  }
+// Create table
+createCompanyTable();
+
+// Routes
+const companyRoutes = require("./routes/companyRoutes");
+server.use("/api", companyRoutes);
+
+const port = process.env.PORT || 5050;
+server.listen(port, () => {
+  console.log(`✅ Stock Server running on port ${port}`);
 });
-
-
-
-const port = process.env.PORT;
-server.listen(port, ()=>{
-    console.log("Stock Server Start");
-    
-})
