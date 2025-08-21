@@ -75,7 +75,7 @@ const addCompany = async ({
     const result = await pool.query(query, values);
     return result.rows[0];
   } catch (err) {
-    console.error("❌ Error inserting company:", err);
+    console.error("Error inserting company:", err);
     throw err;
   }
 };
@@ -86,7 +86,7 @@ const getCompanies = async () => {
     const result = await pool.query("SELECT * FROM companies ORDER BY id");
     return result.rows;
   } catch (err) {
-    console.error("❌ Error fetching companies:", err);
+    console.error(" Error fetching companies:", err);
     throw err;
   }
 };

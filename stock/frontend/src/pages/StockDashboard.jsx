@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { Search, BarChart3, Volume2, Eye, Activity } from "lucide-react";
-import CompanyItem from "../components/CompanyItem";
+import { Eye, BarChart3, Volume2, Activity } from "lucide-react";
+import Sidebar from "../components/Sidebar";
 import MetricCard from "../components/MetricCard";
 import AIPrediction from "../components/AIPrediction";
 import WelcomeMessage from "../components/WelcomeMessage";
@@ -64,64 +64,15 @@ const StockDashboard = () => {
 
   return (
     <div className="flex h-screen bg-gradient-to-br from-slate-50 to-blue-50">
-      {/* Sidebar */}
-      <div className="w-96 bg-white shadow-2xl border-r border-gray-200 flex flex-col">
-        {/* Header */}
-        <div className="p-6 bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-800 text-white">
-          <div className="flex items-center gap-3 mb-2">
-            <div className="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center">
-              <BarChart3 size={24} className="text-white" />
-            </div>
-            <div>
-              <h1 className="text-xl font-bold">StockVision</h1>
-              <p className="text-blue-200 text-sm">JarNox Assignment</p>
-            </div>
-          </div>
-          <div className="flex gap-4 text-sm text-blue-100">
-            <span>NSE</span>
-            <span>•</span>
-            <span>Live Data</span>
-            <span>•</span>
-            <span className="flex items-center gap-1">
-              <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-              Active
-            </span>
-          </div>
-        </div>
-
-        {/* Search */}
-        <div className="p-4 bg-gradient-to-r from-gray-50 to-blue-50 border-b border-gray-100">
-          <div className="relative group">
-            <Search
-              className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 group-focus-within:text-blue-500 transition-colors"
-              size={18}
-            />
-            <input
-              type="text"
-              placeholder="Search stocks, sectors..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-12 pr-4 py-3 bg-white border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all shadow-sm"
-            />
-          </div>
-        </div>
-
-        {/* Company List */}
-        <div className="flex-1 overflow-y-auto py-2">
-          {filteredCompanies.length > 0 ? (
-            filteredCompanies.map((c) => (
-              <CompanyItem
-                key={c.id || c.symbol}
-                company={c}
-                isActive={selectedCompany?.id === c.id}
-                onClick={() => handleCompanySelect(c)}
-              />
-            ))
-          ) : (
-            <p className="text-gray-500 text-center mt-6">No companies found</p>
-          )}
-        </div>
-      </div>
+      {/* Sidebar Component */}
+      <Sidebar
+        companies={companies}
+        filteredCompanies={filteredCompanies}
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
+        selectedCompany={selectedCompany}
+        handleCompanySelect={handleCompanySelect}
+      />
 
       {/* Main Content */}
       <div className="flex-1 flex flex-col">
