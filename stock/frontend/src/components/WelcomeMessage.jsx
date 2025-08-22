@@ -1,8 +1,9 @@
 import { BarChart3, Brain, Activity, Star } from "lucide-react";
 
 const WelcomeMessage = () => (
-   <div className="flex flex-col items-center justify-center h-full text-center p-8 mx-auto max-w-lg">
-    <div className="relative mb-8">
+  
+  <div className="flex flex-col items-center justify-center h-full text-center p-8">
+    <div className="relative ">
       <div className="w-24 h-24 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center shadow-2xl">
         <BarChart3 size={40} className="text-white" />
       </div>

@@ -34,25 +34,36 @@ const AIPrediction = ({ company, isLoading }) => {
   }, [company, isLoading]);
 
   return (
-    <div className="bg-gradient-to-br from-indigo-600 via-purple-600 to-blue-700 rounded-2xl p-6 text-white shadow-2xl">
+    <div className="bg-gradient-to-br from-indigo-600 via-purple-600 to-blue-700 
+      rounded-2xl p-4 sm:p-6 lg:p-8 text-white shadow-2xl 
+      w-full h-full flex flex-col justify-between">
+
       {/* Header */}
-      <div className="flex flex-wrap items-center justify-between mb-4 gap-2">
+      <div className="flex flex-wrap items-center justify-between mb-6 gap-3">
         {/* Left: Title */}
         <div className="flex items-center gap-3">
-          <div className="p-3 bg-white/10 rounded-xl backdrop-blur">
+          <div className="p-3 bg-white/10 rounded-xl backdrop-blur-sm flex items-center justify-center">
             <Brain size={24} className="text-white" />
           </div>
           <div>
-            <h3 className="text-lg font-bold">AI Market Prediction</h3>
-            <p className="text-indigo-200 text-sm">Next trading day forecast</p>
+            <h3 className="text-sm sm:text-base lg:text-lg font-bold leading-tight">
+              AI Market Prediction
+            </h3>
+            <p className="text-xs sm:text-sm lg:text-base text-indigo-200">
+              Next trading day forecast
+            </p>
           </div>
         </div>
 
         {/* Right: Confidence */}
         {confidence > 0 && (
           <div className="text-right min-w-[80px]">
-            <div className="text-2xl font-bold text-green-300">{confidence}%</div>
-            <div className="text-xs text-indigo-200">Confidence</div>
+            <div className="text-lg sm:text-xl lg:text-2xl font-bold text-green-300">
+              {confidence}%
+            </div>
+            <div className="text-xs sm:text-sm lg:text-base text-indigo-200">
+              Confidence
+            </div>
           </div>
         )}
       </div>
@@ -69,14 +80,18 @@ const AIPrediction = ({ company, isLoading }) => {
 
 /* 🔹 Loader Component */
 const Loader = () => (
-  <div className="flex items-center justify-center py-8">
-    <div className="relative">
-      <div className="w-12 h-12 rounded-full border-4 border-white/20 border-t-white animate-spin"></div>
-      <div className="absolute inset-0 w-12 h-12 rounded-full border-4 border-transparent border-r-purple-300 animate-ping"></div>
+  <div className="flex flex-col sm:flex-row items-center justify-center py-8 gap-4">
+    <div className="relative w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14">
+      <div className="w-full h-full rounded-full border-4 border-white/20 border-t-white animate-spin"></div>
+      <div className="absolute inset-0 rounded-full border-4 border-transparent border-r-purple-300 animate-ping"></div>
     </div>
-    <div className="ml-4">
-      <div className="font-semibold">Analyzing market patterns...</div>
-      <div className="text-indigo-200 text-sm">Processing technical indicators</div>
+    <div className="text-center sm:text-left">
+      <div className="font-semibold text-sm sm:text-base lg:text-lg">
+        Analyzing market patterns...
+      </div>
+      <div className="text-indigo-200 text-xs sm:text-sm lg:text-base">
+        Processing technical indicators
+      </div>
     </div>
   </div>
 );
@@ -85,11 +100,13 @@ const Loader = () => (
 const PredictionDisplay = ({ prediction, confidence }) => (
   <div className="space-y-4">
     {/* Price & Change */}
-    <div className="flex items-end justify-between">
+    <div className="flex flex-wrap sm:flex-nowrap items-end justify-between">
       <div>
-        <div className="text-3xl font-bold">₹{prediction.price.toFixed(2)}</div>
+        <div className="text-xl sm:text-2xl lg:text-3xl font-bold">
+          ₹{prediction.price.toFixed(2)}
+        </div>
         <div
-          className={`flex items-center gap-1 mt-1 ${
+          className={`flex items-center gap-2 mt-1 text-xs sm:text-sm lg:text-base ${
             prediction.change >= 0 ? "text-green-300" : "text-red-300"
           }`}
         >
@@ -97,25 +114,27 @@ const PredictionDisplay = ({ prediction, confidence }) => (
           <span className="font-semibold">
             {prediction.change >= 0 ? "+" : ""}₹{Math.abs(prediction.change).toFixed(2)}
           </span>
-          <span className="text-sm">
+          <span>
             ({prediction.change >= 0 ? "+" : ""}
             {prediction.changePercent.toFixed(2)}%)
           </span>
         </div>
       </div>
 
-      <Activity className="w-8 h-8 text-purple-300 opacity-75" />
+      <Activity className="w-6 h-6 sm:w-8 sm:h-8 text-purple-300 opacity-75" />
     </div>
 
     {/* Confidence Dots */}
-    <div className="flex justify-between items-center pt-4 border-t border-white/20">
-      <span className="text-indigo-200 text-sm">Based on technical analysis</span>
-      <div className="flex gap-1">
+    <div className="flex justify-between items-center pt-3 border-t border-white/20">
+      <span className="text-xs sm:text-sm lg:text-base text-indigo-200">
+        Based on technical analysis
+      </span>
+      <div className="flex gap-1 sm:gap-2">
         {[...Array(5)].map((_, i) => (
           <div
             key={i}
-            className={`w-2 h-2 rounded-full ${
-              i < Math.floor(confidence / 20) ? "bg-green-400" : "bg-white/20"
+            className={`w-2 h-2 sm:w-3 sm:h-3 lg:w-4 lg:h-4 rounded-full ${
+              i < Math.floor(confidence / 20) ? "bg-green-400" : "bg-white/30"
             }`}
           ></div>
         ))}

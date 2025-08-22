@@ -87,3 +87,127 @@ Push backend to Render.
 📜 License
 
 MIT License © 2025
+
+
+
+
+
+     
+
+    
+
+
+
+ <div className="flex-1 flex flex-col">
+        {/* Company Info + Metrics */}
+        {selectedCompany && (
+          <div className="p-6 bg-white shadow-sm border-b border-gray-200">
+            <div className="flex flex-col xl:flex-row xl:items-center xl:justify-between gap-6">
+              {/* Company Info */}
+              <div className="flex items-center gap-4">
+                <div className="w-16 h-16 bg-gradient-to-br from-blue-600 to-indigo-600 rounded-2xl flex items-center justify-center text-white font-bold text-xl shadow-lg">
+                  {selectedCompany.symbol?.substring(0, 2)}
+                </div>
+                <div>
+                  <h1 className="text-2xl font-bold text-gray-900 mb-1">
+                    {selectedCompany.name}
+                  </h1>
+                  <div className="flex items-center gap-3 text-sm text-gray-600">
+                    <span className="px-3 py-1 bg-blue-50 text-blue-700 rounded-full font-medium">
+                      {selectedCompany.symbol}
+                    </span>
+                    <span>NSE</span>
+                    <span>•</span>
+                    <span>{selectedCompany.sector}</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Metrics */}
+              <div className="grid grid-cols-2 xl:grid-cols-4 gap-4">
+                <MetricCard
+                  label="Current Price"
+                  value={`₹${Number(selectedCompany?.current_price).toFixed(2)}`}
+                  icon={Eye}
+                  subValue={`${
+                    Number(selectedCompany?.change) >= 0 ? "+" : ""
+                  }₹${Number(selectedCompany?.change || 0).toFixed(2)} (${
+                    Number(
+                      selectedCompany?.change_percent ??
+                        selectedCompany?.changePercent
+                    ).toFixed(2) || "0.00"
+                  }%)`}
+                />
+                <MetricCard
+                  label="Market Cap"
+                  value={selectedCompany?.market_cap || "—"}
+                  icon={BarChart3}
+                  subValue="Total value"
+                />
+                <MetricCard
+                  label="Volume"
+                  value={selectedCompany?.volume || "—"}
+                  icon={Volume2}
+                  subValue="Today's trading"
+                />
+                <MetricCard
+                  label="P/E Ratio"
+                  value={selectedCompany?.pe || "—"}
+                  icon={Activity}
+                  subValue="Price to earnings"
+                />
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Chart + AI Prediction / Welcome */}
+        <div className="flex-1 p-6 grid grid-cols-3 gap-6">
+          {selectedCompany ? (
+            <>
+              {/* Chart Area */}
+              <div className="col-span-2">
+                <ChartArea
+                  selectedCompany={selectedCompany}
+                  isLoading={isLoading}
+                  chartData={chartData}
+                />
+              </div>
+
+              {/* AI Predictions */}
+              <div className="col-span-1 bg-white rounded-3xl shadow-xl border border-gray-200 p-4">
+                <AIPrediction company={selectedCompany} isLoading={isLoading} />
+              </div>
+            </>
+          ) : (
+            <div className="col-span-3 flex items-center justify-center">
+              <WelcomeMessage />
+            </div>
+          )}
+        </div>
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

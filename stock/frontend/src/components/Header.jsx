@@ -2,7 +2,7 @@ import { BarChart3 } from "lucide-react";
 
 const Header = () => {
   return (
-    <div className="p-6 bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-800 text-white">
+    <div className="p-7 bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-800 text-white">
       <div className="flex items-center gap-3 mb-2">
         <div className="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center">
           <BarChart3 size={24} className="text-white" />
