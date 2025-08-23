@@ -15,7 +15,7 @@ createCompanyTable();
 const companyRoutes = require("./routes/companyRoutes");
 server.use("/api", companyRoutes);
 
-const port = process.env.PORT || 5050;
+const port = process.env.PORT;
 server.listen(port, () => {
   console.log(`✅ Stock Server running on port ${port}`);
 });
