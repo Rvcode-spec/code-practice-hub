@@ -5,7 +5,14 @@ const cors = require('cors');
 const { createCompanyTable } = require('./modules/companySchema');
 
 const server = express();
-server.use(cors());
+
+// ✅ CORS Config
+server.use(cors({
+  origin: ["https://stockvisionin.netlify.app"],
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true
+}));
+
 server.use(express.json());
 
 // Create table
@@ -15,7 +22,7 @@ createCompanyTable();
 const companyRoutes = require("./routes/companyRoutes");
 server.use("/api", companyRoutes);
 
-const port = process.env.PORT;
+const port = process.env.PORT || 5050;
 server.listen(port, () => {
   console.log(`✅ Stock Server running on port ${port}`);
 });
