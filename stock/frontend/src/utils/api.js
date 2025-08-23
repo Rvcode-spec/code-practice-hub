@@ -1,7 +1,7 @@
 
 import axios from "axios";
 
-export const API_BASE = "https://stockvision-backend.onrender.com/api";
+export const API_BASE = "https://stockvision-backend.onrender.com/api/com";
 export const fetchCompanies = async () => {
   try {
     const res = await axios.get(`${API_BASE}/companies`);
