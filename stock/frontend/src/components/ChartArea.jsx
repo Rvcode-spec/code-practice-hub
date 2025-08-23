@@ -1,3 +1,5 @@
+import { useEffect, useState, useMemo } from "react";
+import { Line } from "react-chartjs-2";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -8,10 +10,8 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
-import { Line } from "react-chartjs-2";
-import { useState, useMemo } from "react";
 
-// ✅ Register Chart.js components
+// ✅ Register Chart.js
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -22,7 +22,7 @@ ChartJS.register(
   Legend
 );
 
-// ✅ Time Period Filters
+// ✅ Time periods
 const timePeriods = [
   { key: "1D", label: "1 Day", days: 1 },
   { key: "1W", label: "1 Week", days: 7 },
@@ -31,72 +31,88 @@ const timePeriods = [
   { key: "1Y", label: "1 Year", days: 365 },
 ];
 
-const ChartArea = ({ selectedCompany, isLoading }) => {
-  const [timePeriod, setTimePeriod] = useState("1M");
+// ✅ Chart options
+const chartOptions = {
+  responsive: true,
+  maintainAspectRatio: false,
+  plugins: {
+    legend: { display: false },
+    tooltip: {
+      mode: "index",
+      intersect: false,
+      backgroundColor: "rgba(255, 255, 255, 0.95)",
+      titleColor: "#1f2937",
+      bodyColor: "#374151",
+      borderColor: "#e5e7eb",
+      borderWidth: 1,
+      cornerRadius: 12,
+      padding: 12,
+      displayColors: false,
+      callbacks: {
+        title: (context) => `${context[0].label}`,
+        label: (context) => `₹${context.parsed.y.toLocaleString()}`,
+      },
+    },
+  },
+  scales: {
+    x: { grid: { display: false }, ticks: { color: "#6b7280", font: { size: 11 } } },
+    y: {
+      grid: { color: "rgba(0, 0, 0, 0.04)" },
+      ticks: {
+        color: "#6b7280",
+        font: { size: 11 },
+        callback: (value) => `₹${value.toLocaleString()}`,
+      },
+    },
+  },
+  interaction: { intersect: false, mode: "index" },
+  elements: {
+    point: { radius: 0, hoverRadius: 6, backgroundColor: "#3b82f6", borderColor: "#ffffff", borderWidth: 3 },
+    line: { tension: 0.4 },
+  },
+};
 
-  // ✅ Filtered historical data
+const ChartArea = () => {
+  const [companies, setCompanies] = useState([]);
+  const [selectedCompany, setSelectedCompany] = useState(null);
+  const [timePeriod, setTimePeriod] = useState("1M");
+  const [isLoading, setIsLoading] = useState(true);
+
+  // ✅ Fetch companies from backend
+  useEffect(() => {
+    fetch("https://stockvision-backend.onrender.com/api/companies")
+      .then((res) => res.json())
+      .then((data) => {
+        setCompanies(data);
+        setSelectedCompany(data[0]); // default first company
+        setIsLoading(false);
+      })
+      .catch((err) => console.error(err));
+  }, []);
+
+  // ✅ Filter historical data based on timePeriod
   const filteredData = useMemo(() => {
     if (!selectedCompany?.historical_data) return [];
     const days = timePeriods.find((t) => t.key === timePeriod)?.days || 30;
-    return selectedCompany.historical_data.slice(-days); // last N days ka data
+    return selectedCompany.historical_data.slice(-days);
   }, [selectedCompany, timePeriod]);
 
-  // ✅ Chart Data
+  // ✅ Chart data
   const chartData =
     filteredData.length > 0
       ? {
-          labels: filteredData.map((d) => d.date || ""),
+          labels: filteredData.map((d) => d.date),
           datasets: [
             {
-              label: selectedCompany?.name || "Price",
-              data: filteredData.map((d) => d.close || d.price || 0),
+              data: filteredData.map((d) => d.close),
               borderColor: "#3b82f6",
-              backgroundColor: "rgba(59, 130, 246, 0.2)",
-              borderWidth: 2,
-              tension: 0.3,
+              backgroundColor: "rgba(59, 130, 246, 0.08)",
+              borderWidth: 3,
               fill: true,
             },
           ],
         }
       : null;
-
-  // ✅ Chart Options
-  const chartOptions = {
-    responsive: true,
-    maintainAspectRatio: false,
-    plugins: {
-      legend: {
-        display: true,
-        position: "top",
-      },
-      tooltip: {
-        mode: "index",
-        intersect: false,
-        callbacks: {
-          label: (context) => `₹${context.parsed.y.toLocaleString()}`,
-        },
-      },
-    },
-    interaction: {
-      mode: "nearest",
-      axis: "x",
-      intersect: false,
-    },
-    scales: {
-      x: {
-        ticks: {
-          autoSkip: true,
-          maxTicksLimit: 6,
-        },
-      },
-      y: {
-        beginAtZero: false,
-        ticks: {
-          callback: (value) => `₹${value.toLocaleString()}`,
-        },
-      },
-    },
-  };
 
   return (
     <div className="w-full p-6">
@@ -107,15 +123,11 @@ const ChartArea = ({ selectedCompany, isLoading }) => {
             <div className="p-6 border-b border-gray-100 bg-gradient-to-r from-gray-50 to-blue-50">
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                 <div className="flex items-center gap-3">
-                  <h2 className="text-xl font-bold text-gray-900">
-                    Price Chart
-                  </h2>
+                  <h2 className="text-xl font-bold text-gray-900">Price Chart</h2>
                   <span className="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm font-medium">
                     Live
                   </span>
                 </div>
-
-                {/* Time Period Buttons */}
                 <div className="flex gap-2">
                   {timePeriods.map((period) => (
                     <button
@@ -142,21 +154,15 @@ const ChartArea = ({ selectedCompany, isLoading }) => {
                     <div className="w-16 h-16 rounded-full border-4 border-blue-200 border-t-blue-600 animate-spin"></div>
                     <div className="absolute inset-0 w-16 h-16 rounded-full border-4 border-transparent border-r-purple-300 animate-ping"></div>
                   </div>
-                  <h3 className="text-lg font-semibold text-gray-700 mb-2">
-                    Loading Market Data
-                  </h3>
-                  <p className="text-gray-500 text-center">
-                    Fetching real-time prices and technical indicators...
-                  </p>
+                  <h3 className="text-lg font-semibold text-gray-700 mb-2">Loading Market Data</h3>
+                  <p className="text-gray-500 text-center">Fetching real-time prices and technical indicators...</p>
                 </div>
               ) : chartData ? (
-                <div className="w-full h-[300px] sm:h-[400px] md:h-[500px]">
+                <div className="w-full h-[400px]">
                   <Line data={chartData} options={chartOptions} />
                 </div>
               ) : (
-                <p className="text-gray-400 text-center">
-                  No historical data available
-                </p>
+                <p className="text-gray-400 text-center">No historical data available</p>
               )}
             </div>
           </>
