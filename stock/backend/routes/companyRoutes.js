@@ -58,4 +58,16 @@ router.post("/companies", async (req, res) => {
   }
 });
 
+
+router.delete("/companies/:id", async (req, res) => {
+  try {
+    await pool.query("DELETE FROM companies WHERE id = $1", [req.params.id]);
+    res.json({ message: "Company deleted" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
+
 module.exports = router;
