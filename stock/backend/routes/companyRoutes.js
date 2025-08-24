@@ -48,7 +48,7 @@ router.post("/companies", async (req, res) => {
       volume,
       market_cap,
       pe,
-      historical_data: historical_data?.length ? historical_data : generateRandomData(30, current_price, 50) // 👈 agar data nahi bheja to generate kar do
+     historical_data: historical_data?.length ? historical_data : generateRandomData(365, current_price, 50)
     });
 
     res.status(201).json(company);
