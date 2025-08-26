@@ -34,8 +34,7 @@ The application provides an intuitive UI, scalable backend, and effective data v
 
 - **Bonus Enhancements:**  
   - 52-week high/low, average volume, and P/E ratio metrics  
-  - AI-based next-day price prediction (sample logic included)  
-  - Dockerized setup for easy deployment  
+  - AI-based next-day price prediction  
   - Live deployment on Render
 
 ---
@@ -44,19 +43,18 @@ The application provides an intuitive UI, scalable backend, and effective data v
 
 - **Backend:** Node.js, Express.js, PostgreSQL
 - **Frontend:** React.js, Tailwind CSS, Chart.js
-- **Deployment:** Render (cloud hosting), Docker
+- **Deployment:** Render, Netlify
 - **Tools:** Postman, Git
 
 ---
 
-## Development Approach
+## Development Approach ##
 
-I adopted a modular and scalable development strategy, ensuring clear separation between backend and frontend components. The backend exposes secure RESTful APIs, while the frontend leverages reusable React components for a seamless user experience. Special attention was given to error handling, data integrity, and responsive design. Bonus features such as AI-based predictions and Docker support were implemented to showcase versatility and a forward-thinking approach.
+The project was developed using a modular and scalable strategy with a clear separation between backend and frontend. The backend delivered secure RESTful APIs with a focus on data integrity, authentication, and validation, while the frontend utilized reusable React components, responsive layouts, and efficient state management to ensure a smooth user experience. Error handling and clean coding practices made the system more reliable and maintainable. Bonus features like AI-based predictions highlighted an innovative and forward-thinking approach.
 
----
-## Challenges Encountered
+## Challenges Encountered ##
 
-Key challenges included configuring CORS for smooth frontend-backend communication, managing database sequences after bulk deletions, and ensuring consistent deployment on cloud platforms. These were addressed through careful debugging, thorough testing, and leveraging best practices in web development.
+Key challenges included configuring CORS for seamless frontend-backend communication, managing database sequences after bulk deletions, ensuring consistent deployment on cloud platforms, and improving frontend responsiveness where response times were initially high. These were addressed through proper headers, automated sequence resets, CI/CD pipelines, optimized API calls, and refined state management.
 
 ---
 
@@ -90,7 +88,7 @@ npm start
 
 - Complete source code
 - Sample dataset
-- Screenshots and deployed project link
+- deployed project link
 - Documentation and development summary
 
 ---
@@ -98,7 +96,6 @@ npm start
 ## Deployed Project
 
 [Live Demo](https://stockvisionin.netlify.app/)
-[Screenshot]()
 [backend](https://stockvision-backend.onrender.com)
 
 ---
@@ -106,7 +103,8 @@ npm start
 ## Contact
 
 For further information or to schedule an interview, please contact:  
-📧 
+📧 infowebservices2024@gmail.com
+
 
 ---
 
