@@ -91,8 +91,20 @@ const getCompanies = async () => {
   }
 };
 
+const deleteAllCompanies = async () => {
+  try {
+    await pool.query("DELETE FROM companies");
+    await pool.query("ALTER SEQUENCE companies_id_seq RESTART WITH 1");
+    console.log("✅ All companies deleted and sequence reset");
+  } catch (err) {
+    console.error("❌ Error deleting companies:", err);
+    throw err;
+  }
+};
+
 module.exports = {
   createCompanyTable,
   addCompany,
-  getCompanies
+  getCompanies,
+  deleteAllCompanies
 };

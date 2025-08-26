@@ -43,6 +43,8 @@ const StockDashboard = () => {
         setTimeout(() => setIsLoading(false), 1000); // mock load
     };
 
+    
+
     // ✅ Prepare chart data
     const chartData =
         selectedCompany?.historical_data?.length > 0

@@ -1,7 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const { getCompanies, addCompany } = require("../modules/companySchema");
+const { getCompanies, addCompany , deleteAllCompanies } = require("../modules/companySchema");
 const generateRandomData = require("../utils/generateRandomData");
+const pool = require("../config/db"); 
 
 // GET all companies
 router.get("/companies", async (req, res) => {
@@ -11,6 +12,16 @@ router.get("/companies", async (req, res) => {
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "Server error" });
+  }
+});
+
+router.delete("/delete", async (req, resp) => {
+  try {
+    await deleteAllCompanies();
+    resp.json({ message: "All companies deleted successfully" });
+  } catch (err) {
+    console.error("❌ Error deleting companies:", err.message);
+    resp.status(500).json({ message: "Server error", error: err.message });
   }
 });
 
@@ -59,15 +70,8 @@ router.post("/companies", async (req, res) => {
 });
 
 
-router.delete("/companies/:id", async (req, res) => {
-  try {
-    await pool.query("DELETE FROM companies WHERE id = $1", [req.params.id]);
-    res.json({ message: "Company deleted" });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: "Server error" });
-  }
-});
+
+
 
 
 module.exports = router;
