@@ -11,7 +11,7 @@ const CompanyItem = ({ company, isActive, onClick }) => {
 
   return (
     <div
-      className={`group p-5 mx-2 my-4 rounded-2xl cursor-pointer transition-all duration-500 ease-out transform hover:-translate-y-1 ${
+      className={`group p-4 sm:p-5 mx-2 my-3 sm:my-4 rounded-2xl cursor-pointer transition-all duration-500 ease-out transform hover:-translate-y-1 ${
         isActive
           ? "bg-gradient-to-br from-blue-600 via-blue-500 to-indigo-600 text-white shadow-2xl scale-[1.02]"
           : "bg-white hover:bg-gray-50 hover:shadow-xl border border-gray-100"
@@ -19,18 +19,18 @@ const CompanyItem = ({ company, isActive, onClick }) => {
       onClick={onClick}
     >
       {/* Company Header */}
-      <div className="flex items-start justify-between mb-4">
+      <div className="flex items-start justify-between mb-3 sm:mb-4">
         <div className="flex-1 min-w-0">
           <h3
-            className={`font-bold text-base leading-snug mb-2 ${
+            className={`font-bold text-sm sm:text-base lg:text-lg leading-snug mb-1 sm:mb-2 ${
               isActive ? "text-white" : "text-gray-900"
             }`}
           >
             {company.name}
           </h3>
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center gap-1 sm:gap-2">
             <span
-              className={`text-xs font-medium px-2 py-1 rounded-full ${
+              className={`text-[10px] sm:text-xs font-medium px-2 py-0.5 sm:py-1 rounded-full ${
                 isActive
                   ? "bg-white/20 text-blue-100"
                   : "bg-gray-100 text-gray-600"
@@ -39,7 +39,7 @@ const CompanyItem = ({ company, isActive, onClick }) => {
               {company.symbol}
             </span>
             <span
-              className={`text-xs ${
+              className={`text-[10px] sm:text-xs ${
                 isActive ? "text-blue-200" : "text-gray-500"
               }`}
             >
@@ -48,22 +48,22 @@ const CompanyItem = ({ company, isActive, onClick }) => {
           </div>
         </div>
         {isActive && (
-          <Star className="w-5 h-5 text-yellow-300 fill-current mt-1" />
+          <Star className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-300 fill-current mt-1" />
         )}
       </div>
 
       {/* Price Section */}
-      <div className="space-y-3">
-        <div className="flex items-end justify-between">
+      <div className="space-y-2 sm:space-y-3">
+        <div className="flex flex-wrap items-end justify-between gap-2">
           <span
-            className={`text-lg font-bold ${
+            className={`text-base sm:text-lg lg:text-xl font-bold ${
               isActive ? "text-white" : "text-gray-900"
             }`}
           >
             ₹{safeLocale(company.current_price)}
           </span>
           <div
-            className={`flex items-center gap-1 px-2 py-1 rounded-lg text-xs font-medium ${
+            className={`flex items-center gap-1 px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-md text-[11px] sm:text-xs font-medium ${
               isActive
                 ? isPositive
                   ? "bg-green-500/30 text-green-100"
@@ -73,7 +73,11 @@ const CompanyItem = ({ company, isActive, onClick }) => {
                 : "bg-red-50 text-red-700"
             }`}
           >
-            {isPositive ? <TrendingUp size={12} /> : <TrendingDown size={12} />}
+            {isPositive ? (
+              <TrendingUp className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
+            ) : (
+              <TrendingDown className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
+            )}
             {isPositive ? "+" : ""}
             {safeFixed(company.change_percent)}%
           </div>
@@ -81,7 +85,7 @@ const CompanyItem = ({ company, isActive, onClick }) => {
 
         {/* Additional Info */}
         <div
-          className={`flex justify-between text-xs ${
+          className={`flex flex-wrap justify-between text-[11px] sm:text-xs ${
             isActive ? "text-blue-100" : "text-gray-500"
           }`}
         >

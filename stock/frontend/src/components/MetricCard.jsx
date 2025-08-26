@@ -1,11 +1,11 @@
 import { TrendingUp, TrendingDown } from "lucide-react";
 
 const MetricCard = ({ label, value, icon: Icon, trend, subValue }) => (
-  <div className="group bg-white rounded-2xl p-4 shadow-sm border border-gray-100 hover:shadow-lg hover:border-blue-200 transition-all duration-300 hover:-translate-y-1">
+  <div className="group bg-white rounded-2xl p-2 shadow-sm border border-gray-100 hover:shadow-lg hover:border-blue-200 transition-all duration-300 hover:-translate-y-1">
     <div className="flex items-start justify-between mb-3">
       <div className="flex items-center gap-2">
         <div className="p-2 bg-blue-50 rounded-xl group-hover:bg-blue-100 transition-colors">
-          <Icon size={16} className="text-blue-600" />
+          <Icon size={8} className="text-blue-600" />
         </div>
         <div className="text-xs font-medium text-gray-500 uppercase tracking-wide">{label}</div>
       </div>

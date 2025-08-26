@@ -106,7 +106,7 @@ npm start
 ## Contact
 
 For further information or to schedule an interview, please contact:  
-📧 shaktijarnox@outlook.com
+📧 
 
 ---
 
