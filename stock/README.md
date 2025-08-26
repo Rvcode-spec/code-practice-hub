@@ -1,13 +1,10 @@
 # 📊 Stock Market Dashboard Web Application
-
 ![Status: Deployed](https://img.shields.io/badge/Status-Deployed-brightgreen)  
 ![Stack: MERN](https://img.shields.io/badge/Stack-MERN-blue)  
 ![Database: PostgreSQL](https://img.shields.io/badge/Database-PostgreSQL-lightgrey)  
 ![Charts: Chart.js](https://img.shields.io/badge/Charts-Chart.js-orange)  
-
 ---
-
-🚀 Overview
+## 🚀 Overview ##
 
 This project demonstrates my ability to design and implement a robust stock market dashboard using modern web technologies.
 The application provides an intuitive UI, scalable backend, and effective data visualization, aligned with industry standards for fintech solutions.
@@ -29,7 +26,9 @@ The application provides an intuitive UI, scalable backend, and effective data v
   - Responsive design using Tailwind CSS
 
 - **Backend:**  
-  - Node.js and Express.js for API development  
+  - Node.js & Express.js REST API 
+  - PostgreSQL for reliable storage
+  - API endpoints for companies & stock history
   - Secure environment variable management  
   - Comprehensive error handling
 
@@ -55,7 +54,6 @@ The application provides an intuitive UI, scalable backend, and effective data v
 I adopted a modular and scalable development strategy, ensuring clear separation between backend and frontend components. The backend exposes secure RESTful APIs, while the frontend leverages reusable React components for a seamless user experience. Special attention was given to error handling, data integrity, and responsive design. Bonus features such as AI-based predictions and Docker support were implemented to showcase versatility and a forward-thinking approach.
 
 ---
-
 ## Challenges Encountered
 
 Key challenges included configuring CORS for smooth frontend-backend communication, managing database sequences after bulk deletions, and ensuring consistent deployment on cloud platforms. These were addressed through careful debugging, thorough testing, and leveraging best practices in web development.
@@ -68,7 +66,7 @@ Key challenges included configuring CORS for smooth frontend-backend communicati
 ```bash
 cd backend
 npm install
-node index.js
+nmp start / nodemon
 ```
 
 **Frontend**
@@ -99,7 +97,9 @@ npm start
 
 ## Deployed Project
 
-[Live Demo](https://stockvision-backend.onrender.com)
+[Live Demo](https://stockvisionin.netlify.app/)
+[Screenshot]()
+[backend](https://stockvision-backend.onrender.com)
 
 ---
 
