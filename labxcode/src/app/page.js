@@ -1,293 +1,115 @@
-"use client"
+"use client";
 
-import React, { useState, useEffect } from 'react';
-import { ChevronRight, Code, Smartphone, Palette, Server, Star, ArrowUp, Menu, X } from 'lucide-react';
+import { useState, useEffect } from "react";
+import { X, Menu } from "lucide-react";
 
-export default function DigitalSolutionsLanding() {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [currentService, setCurrentService] = useState(0);
+export default function Navbar() {
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [isScrolled, setIsScrolled] = useState(false);
 
-  const services = [
-    { icon: Code, title: 'Web Development', desc: 'Modern, responsive websites built with cutting-edge technology' },
-    { icon: Smartphone, title: 'Mobile Apps', desc: 'Native and cross-platform mobile applications' },
-    { icon: Palette, title: 'UI/UX Design', desc: 'Beautiful, intuitive user interfaces and experiences' },
-    { icon: Server, title: 'Server Solutions', desc: 'Robust backend infrastructure and hosting services' }
-  ];
+    useEffect(() => {
+        const handleScroll = () => {
+            if (window.scrollY > 10) {
+                setIsScrolled(true);
+            } else {
+                setIsScrolled(false);
+            }
+        };
 
-  useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 50);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentService((prev) => (prev + 1) % services.length);
-    }, 3000);
-    return () => clearInterval(interval);
-  },[]);
-
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white overflow-x-hidden">
-      {/* Animated Background Elements */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse"></div>
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-blue-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse animation-delay-2000"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-cyan-500 rounded-full mix-blend-multiply filter blur-xl opacity-10 animate-spin" style={{ animationDuration: '20s' }}></div>
-      </div>
-
-      {/* Navigation */}
-      <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-slate-900/90 backdrop-blur-lg shadow-lg' : 'bg-transparent'}`}>
-        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-          <div className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
-            DigiSolutions
-          </div>
-          
-          <div className="hidden md:flex space-x-8">
-            {['Home', 'Services', 'Projects', 'Contact'].map((item, idx) => (
-              <a key={idx} href={`#${item.toLowerCase()}`} className="hover:text-cyan-400 transition-colors duration-300 cursor-pointer">
-                {item}
-              </a>
-            ))}
-          </div>
-
-          <button 
-            className="md:hidden"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-          >
-            {isMenuOpen ? <X /> : <Menu />}
-          </button>
-        </div>
-
-        {/* Mobile Menu */}
-        <div className={`md:hidden transition-all duration-300 ${isMenuOpen ? 'max-h-64 opacity-100' : 'max-h-0 opacity-0'} overflow-hidden bg-slate-900/95 backdrop-blur-lg`}>
-          <div className="px-6 py-4 space-y-4">
-            {['Home', 'Services', 'Projects', 'Contact'].map((item, idx) => (
-              <a key={idx} href={`#${item.toLowerCase()}`} className="block hover:text-cyan-400 transition-colors duration-300">
-                {item}
-              </a>
-            ))}
-          </div>
-        </div>
-      </nav>
-
-      {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center px-6">
-        <div className="max-w-6xl mx-auto text-center">
-          <div className="mb-8 animate-fade-in">
-            <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
-              Creating 
-              <span className="block bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent animate-gradient">
-                Innovative
-              </span>
-              Digital Solutions
-            </h1>
-            <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto">
-              With cutting-edge technology and modern design principles
-            </p>
-          </div>
-
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
-            <button className="group bg-gradient-to-r from-cyan-500 to-purple-500 hover:from-cyan-600 hover:to-purple-600 px-8 py-4 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-lg">
-              Get Started
-              <ChevronRight className="inline-block ml-2 group-hover:translate-x-1 transition-transform" size={20} />
-            </button>
-            <button className="border-2 border-cyan-400 hover:bg-cyan-400 hover:text-slate-900 px-8 py-4 rounded-full font-semibold transition-all duration-300 transform hover:scale-105">
-              View Portfolio
-            </button>
-          </div>
-
-          {/* Animated Service Showcase */}
-          <div className="bg-slate-800/50 backdrop-blur-lg rounded-2xl p-8 max-w-md mx-auto border border-slate-700">
-            <div key={currentService} className="animate-fade-in">
-              {React.createElement(services[currentService].icon, { 
-                className: "w-12 h-12 text-cyan-400 mx-auto mb-4" 
-              })}
-              <h3 className="text-xl font-semibold mb-2">{services[currentService].title}</h3>
-              <p className="text-gray-300">{services[currentService].desc}</p>
-            </div>
-            
-            <div className="flex justify-center mt-6 space-x-2">
-              {services.map((_, idx) => (
-                <button
-                  key={idx}
-                  className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                    idx === currentService ? 'bg-cyan-400' : 'bg-gray-600'
-                  }`}
-                  onClick={() => setCurrentService(idx)}
-                />
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Services Section */}
-      <section id="services" className="py-20 px-6 relative">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl md:text-5xl font-bold text-center mb-16">
-            Our <span className="bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">Services</span>
-          </h2>
-          
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {services.map((service, idx) => (
-              <div 
-                key={idx}
-                className="group bg-slate-800/30 backdrop-blur-lg rounded-2xl p-8 border border-slate-700 hover:border-cyan-400 transition-all duration-500 transform hover:-translate-y-2 hover:shadow-2xl"
-              >
-                <div className="bg-gradient-to-br from-cyan-500 to-purple-500 w-16 h-16 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                  <service.icon className="w-8 h-8 text-white" />
-                </div>
-                <h3 className="text-xl font-semibold mb-4 group-hover:text-cyan-400 transition-colors">
-                  {service.title}
-                </h3>
-                <p className="text-gray-300 leading-relaxed">{service.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Features Section */}
-      <section className="py-20 px-6 bg-slate-900/50">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <div>
-              <h2 className="text-4xl md:text-5xl font-bold mb-8">
-                Why Choose <span className="bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">Us?</span>
-              </h2>
-              <div className="space-y-6">
-                {[
-                  'Next.js & Modern Frameworks',
-                  'Tailwind CSS & Responsive Design',
-                  'Advanced Animations & Interactions',
-                  'Server Solutions & Hosting',
-                  '24/7 Support & Maintenance'
-                ].map((feature, idx) => (
-                  <div key={idx} className="flex items-center space-x-4 group">
-                    <div className="w-2 h-2 bg-cyan-400 rounded-full group-hover:scale-150 transition-transform"></div>
-                    <span className="text-lg group-hover:text-cyan-400 transition-colors">{feature}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-            
-            <div className="relative">
-              <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-3xl p-8 border border-slate-700 hover:border-cyan-400 transition-all duration-500 transform hover:rotate-1">
-                <div className="space-y-4">
-                  <div className="flex items-center space-x-2">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
-                    ))}
-                  </div>
-                  <p className="text-lg italic">{"Outstanding work! They delivered exactly what we needed with incredible attention to detail and modern design."}</p>
-                  <div className="flex items-center space-x-3">
-                    <div className="w-10 h-10 bg-gradient-to-r from-cyan-400 to-purple-400 rounded-full"></div>
-                    <div>
-                      <p className="font-semibold">Sarah Johnson</p>
-                      <p className="text-sm text-gray-400">CEO, TechStart</p>
+    return (
+        <>
+            <div className=" bg-slate-950">
+                {/* Navbar */}
+                <nav
+                    className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled
+                        ? "bg-slate-700/100 backdrop-blur-lg shadow-md"
+                        : "bg-transparent"
+                        }`}
+                >
+                    {/* Background Animated Blobs */}
+                    <div className="fixed inset-0 overflow-hidden pointer-events-none">
+                        <div className="absolute -top-40 -right-40 w-80 h-80 bg-violet-600 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse"></div>
                     </div>
-                  </div>
+
+                    {/* Navbar Content */}
+                    <div className="w-full mx-auto py-4 flex items-center justify-between pl-[5px] pr-4 md:px-8 lg:px-16">
+                        {/* Logo */}
+                        <div className="text-4xl font-bold bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent drop-shadow-md">
+                            LabXCode
+                        </div>
+
+
+                        {/* Desktop Menu */}
+                        <div className="hidden md:flex space-x-8 text-2xl">
+                            {["Home", "Services", "Projects", "Contact"].map((item, idx) => (
+                                <a
+                                    key={idx}
+                                    href={`#${item.toLowerCase()}`}
+                                    className="text-white hover:text-cyan-400 transition-colors duration-300 cursor-pointer"
+                                >
+                                    {item}
+                                </a>
+                            ))}
+                        </div>
+
+                        {/* Mobile Menu Button */}
+                        <button
+                            className="md:hidden text-white"
+                            onClick={() => setIsMenuOpen(!isMenuOpen)}
+                        >
+                            {isMenuOpen ? <X /> : <Menu />}
+                        </button>
+                    </div>
+
+                    {/* Mobile Dropdown Menu */}
+                    <div
+                        className={`md:hidden transition-all duration-300 ${isMenuOpen ? "max-h-64 opacity-100" : "max-h-0 opacity-0"
+                            } overflow-hidden bg-slate-900/95 backdrop-blur-lg`}
+                    >
+                        <div className="px-6 py-4 space-y-4">
+                            {["Home", "Services", "Projects", "Contact"].map((item, idx) => (
+                                <a
+                                    key={idx}
+                                    href={`#${item.toLowerCase()}`}
+                                    className="block text-white hover:text-cyan-400 transition-colors duration-300"
+                                >
+                                    {item}
+                                </a>
+                            ))}
+                        </div>
+                    </div>
+                </nav>
+            </div>
+            <header className="relative w-full h-screen bg-cover bg-center" style={{ backgroundImage: "url('project-1.jpg')" }}>
+                {/* Overlay for darkening the image */}
+                <div className="absolute inset-0 bg-black/50"></div>
+
+                {/* Content */}
+                <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-4">
+                    <p className="text-green-500 text-lg mb-2">Best IT Solutions</p>
+                    <h1 className="text-white text-4xl md:text-6xl font-bold mb-4">
+                        An Innovative IT Solutions Agency
+                    </h1>
+                    <p className="text-gray-200 max-w-2xl mb-6">
+                        Lorem ipsum dolor sit amet elit. Sed efficitur quis purus ut interdum.
+                        Pellentesque aliquam dolor eget urna ultricies tincidunt.
+                    </p>
+                    <div className="flex gap-4 justify-center">
+                        <button className="bg-green-500 text-white px-6 py-2 rounded-lg hover:bg-green-600 transition">
+                            Read More
+                        </button>
+                        <button className="bg-blue-700 text-white px-6 py-2 rounded-lg hover:bg-blue-800 transition">
+                            Contact Us
+                        </button>
+                    </div>
                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+            </header>
 
-      {/* CTA Section */}
-      <section className="py-20 px-6">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl md:text-5xl font-bold mb-8">
-            Ready to Transform Your 
-            <span className="block bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">Digital Presence?</span>
-          </h2>
-          <p className="text-xl text-gray-300 mb-12">{`Let's create something amazing together`}</p>
-          
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="group bg-gradient-to-r from-cyan-500 to-purple-500 hover:from-cyan-600 hover:to-purple-600 px-10 py-4 rounded-full font-semibold text-lg transition-all duration-300 transform hover:scale-105 hover:shadow-xl">
-              Start Your Project
-              <ChevronRight className="inline-block ml-2 group-hover:translate-x-1 transition-transform" size={24} />
-            </button>
-            <button className="border-2 border-cyan-400 hover:bg-cyan-400 hover:text-slate-900 px-10 py-4 rounded-full font-semibold text-lg transition-all duration-300 transform hover:scale-105">
-              Schedule Consultation
-            </button>
-          </div>
-        </div>
-      </section>
 
-      {/* Footer */}
-      <footer className="bg-slate-900 py-12 px-6 border-t border-slate-800">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid md:grid-cols-4 gap-8">
-            <div className="col-span-2">
-              <div className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent mb-4">
-                DigiSolutions
-              </div>
-              <p className="text-gray-400 max-w-md">
-                Creating innovative digital solutions with cutting-edge technology and modern design principles.
-              </p>
-            </div>
-            
-            <div>
-              <h4 className="font-semibold mb-4">Services</h4>
-              <ul className="space-y-2 text-gray-400">
-                <li className="hover:text-cyan-400 transition-colors cursor-pointer">Web Development</li>
-                <li className="hover:text-cyan-400 transition-colors cursor-pointer">Mobile Apps</li>
-                <li className="hover:text-cyan-400 transition-colors cursor-pointer">UI/UX Design</li>
-                <li className="hover:text-cyan-400 transition-colors cursor-pointer">Server Solutions</li>
-              </ul>
-            </div>
-            
-            <div>
-              <h4 className="font-semibold mb-4">Contact</h4>
-              <ul className="space-y-2 text-gray-400">
-                <li>hello@digisolutions.com</li>
-                <li>+1 (555) 123-4567</li>
-                <li>Delhi, India</li>
-              </ul>
-            </div>
-          </div>
-          
-          <div className="border-t border-slate-800 mt-12 pt-8 text-center text-gray-400">
-            <p>&copy; 2025 DigiSolutions. All rights reserved.</p>
-          </div>
-        </div>
-      </footer>
-
-      {/* Scroll to Top Button */}
-      <button 
-        className={`fixed bottom-8 right-8 bg-gradient-to-r from-cyan-500 to-purple-500 p-3 rounded-full shadow-lg transition-all duration-300 z-50 ${isScrolled ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
-        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-      >
-        <ArrowUp className="w-6 h-6 text-white" />
-      </button>
-
-      <style jsx>{`
-        @keyframes fade-in {
-          from { opacity: 0; transform: translateY(20px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        
-        @keyframes gradient {
-          0%, 100% { background-position: 0% 50%; }
-          50% { background-position: 100% 50%; }
-        }
-        
-        .animate-fade-in {
-          animation: fade-in 0.8s ease-out;
-        }
-        
-        .animate-gradient {
-          background-size: 200% 200%;
-          animation: gradient 3s ease infinite;
-        }
-        
-        .animation-delay-2000 {
-          animation-delay: 2s;
-        }
-      `}</style>
-    </div>
-  );
+        </>
+    );
 }

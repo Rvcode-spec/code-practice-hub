@@ -1,0 +1,117 @@
+"use client"
+
+import React, { useState, useEffect } from 'react';
+import { ChevronRight, Code, Smartphone, Palette, Server, Star, ArrowUp, Menu, X } from 'lucide-react';
+import Navigation from '../_component/Navbar';
+import Features from '../_component/Features';
+import Footer from '../_component/Footer';
+
+export default function DigitalSolutionsLanding() {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [currentService, setCurrentService] = useState(0);
+
+  
+  useEffect(() => {
+    const handleScroll = () => setIsScrolled(window.scrollY > 50);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentService((prev) => (prev + 1) % services.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  },[]);
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white overflow-x-hidden">
+      {/* Animated Background Elements */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse"></div>
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-blue-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse animation-delay-2000"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-cyan-500 rounded-full mix-blend-multiply filter blur-xl opacity-10 animate-spin" style={{ animationDuration: '20s' }}></div>
+      </div>
+
+      {/* Navigation */}
+      <Navigation/>
+
+      {/* Hero Section */}
+      <section className="relative min-h-screen flex items-center justify-center px-6">
+        <div className="max-w-6xl mx-auto text-center">
+          <div className="mb-8 animate-fade-in">
+            <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+              Creating 
+              <span className="block bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent animate-gradient">
+                Innovative
+              </span>
+              Digital Solutions
+            </h1>
+            <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto">
+              With cutting-edge technology and modern design principles
+            </p>
+          </div>
+
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
+            <button className="group bg-gradient-to-r from-cyan-500 to-purple-500 hover:from-cyan-600 hover:to-purple-600 px-8 py-4 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-lg">
+              Get Started
+              <ChevronRight className="inline-block ml-2 group-hover:translate-x-1 transition-transform" size={20} />
+            </button>
+            <button className="border-2 border-cyan-400 hover:bg-cyan-400 hover:text-slate-900 px-8 py-4 rounded-full font-semibold transition-all duration-300 transform hover:scale-105">
+              View Portfolio
+            </button>
+          </div>
+
+          {/* Animated Service Showcase */}
+          
+        </div>
+      </section>
+      {/* Features Section */}
+      <Features/>
+      
+      {/* Footer */}
+      <Footer/>
+      
+
+     
+     
+
+  
+
+  
+
+      {/* Scroll to Top Button */}
+      <button 
+        className={`fixed bottom-8 right-8 bg-gradient-to-r from-cyan-500 to-purple-500 p-3 rounded-full shadow-lg transition-all duration-300 z-50 ${isScrolled ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
+        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+      >
+        <ArrowUp className="w-6 h-6 text-white" />
+      </button>
+
+      <style jsx>{`
+        @keyframes fade-in {
+          from { opacity: 0; transform: translateY(20px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes gradient {
+          0%, 100% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+        }
+        
+        .animate-fade-in {
+          animation: fade-in 0.8s ease-out;
+        }
+        
+        .animate-gradient {
+          background-size: 200% 200%;
+          animation: gradient 3s ease infinite;
+        }
+        
+        .animation-delay-2000 {
+          animation-delay: 2s;
+        }
+      `}</style>
+    </div>
+  );
+}
