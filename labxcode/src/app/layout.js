@@ -1,5 +1,6 @@
 import { Tinos} from "next/font/google";
 import "./globals.css";
+import Navbar from "./_components/Navbar";
 
 const tinos = Tinos ({
   subsets: ["latin"],
@@ -15,8 +16,8 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      {/* Ab poore site me Tinos apply hoga */}
       <body className={`${tinos.className} antialiased`}>
+        <Navbar />
         {children}
       </body>
     </html>

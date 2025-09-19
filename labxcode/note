@@ -1,117 +1,113 @@
-"use client"
+"use client";
 
-import React, { useState, useEffect } from 'react';
-import { ChevronRight, Code, Smartphone, Palette, Server, Star, ArrowUp, Menu, X } from 'lucide-react';
-import Navigation from '../_component/Navbar';
-import Features from '../_component/Features';
-import Footer from '../_component/Footer';
+import { useState, useEffect } from "react";
+import { X, Menu } from "lucide-react";
 
-export default function DigitalSolutionsLanding() {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [currentService, setCurrentService] = useState(0);
+export default function Navbar() {
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [isScrolled, setIsScrolled] = useState(false);
 
-  
-  useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 50);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+    useEffect(() => {
+        const handleScroll = () => {
+            if (window.scrollY > 10) {
+                setIsScrolled(true);
+            } else {
+                setIsScrolled(false);
+            }
+        };
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentService((prev) => (prev + 1) % services.length);
-    }, 3000);
-    return () => clearInterval(interval);
-  },[]);
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
 
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white overflow-x-hidden">
-      {/* Animated Background Elements */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse"></div>
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-blue-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse animation-delay-2000"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-cyan-500 rounded-full mix-blend-multiply filter blur-xl opacity-10 animate-spin" style={{ animationDuration: '20s' }}></div>
-      </div>
+    return (
+        <>
+            <div className=" bg-slate-950">
+                {/* Navbar */}
+                <nav
+                    className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled
+                        ? "bg-slate-700/100 backdrop-blur-lg shadow-md"
+                        : "bg-transparent"
+                        }`}
+                >
+                    {/* Background Animated Blobs */}
+                    <div className="fixed inset-0 overflow-hidden pointer-events-none">
+                        <div className="absolute -top-40 -right-40 w-80 h-80 bg-violet-600 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse"></div>
+                    </div>
 
-      {/* Navigation */}
-      <Navigation/>
+                    {/* Navbar Content */}
+                    <div className="w-full mx-auto py-4 flex items-center justify-between pl-[5px] pr-4 md:px-8 lg:px-16">
+                        {/* Logo */}
+                        <div className="text-4xl font-bold bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent drop-shadow-md">
+                            LabXCode
+                        </div>
 
-      {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center px-6">
-        <div className="max-w-6xl mx-auto text-center">
-          <div className="mb-8 animate-fade-in">
-            <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
-              Creating 
-              <span className="block bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent animate-gradient">
-                Innovative
-              </span>
-              Digital Solutions
-            </h1>
-            <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto">
-              With cutting-edge technology and modern design principles
-            </p>
-          </div>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
-            <button className="group bg-gradient-to-r from-cyan-500 to-purple-500 hover:from-cyan-600 hover:to-purple-600 px-8 py-4 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-lg">
-              Get Started
-              <ChevronRight className="inline-block ml-2 group-hover:translate-x-1 transition-transform" size={20} />
-            </button>
-            <button className="border-2 border-cyan-400 hover:bg-cyan-400 hover:text-slate-900 px-8 py-4 rounded-full font-semibold transition-all duration-300 transform hover:scale-105">
-              View Portfolio
-            </button>
-          </div>
+                        {/* Desktop Menu */}
+                        <div className="hidden md:flex space-x-8 text-2xl">
+                            {["Home", "Services", "Projects", "Contact"].map((item, idx) => (
+                                <a
+                                    key={idx}
+                                    href={`#${item.toLowerCase()}`}
+                                    className="text-white hover:text-cyan-400 transition-colors duration-300 cursor-pointer"
+                                >
+                                    {item}
+                                </a>
+                            ))}
+                        </div>
 
-          {/* Animated Service Showcase */}
-          
-        </div>
-      </section>
-      {/* Features Section */}
-      <Features/>
-      
-      {/* Footer */}
-      <Footer/>
-      
+                        {/* Mobile Menu Button */}
+                        <button
+                            className="md:hidden text-white"
+                            onClick={() => setIsMenuOpen(!isMenuOpen)}
+                        >
+                            {isMenuOpen ? <X /> : <Menu />}
+                        </button>
+                    </div>
 
-     
-     
+                    {/* Mobile Dropdown Menu */}
+                    <div
+                        className={`md:hidden transition-all duration-300 ${isMenuOpen ? "max-h-64 opacity-100" : "max-h-0 opacity-0"
+                            } overflow-hidden bg-slate-900/95 backdrop-blur-lg`}
+                    >
+                        <div className="px-6 py-4 space-y-4">
+                            {["Home", "Services", "Projects", "Contact"].map((item, idx) => (
+                                <a
+                                    key={idx}
+                                    href={`#${item.toLowerCase()}`}
+                                    className="block text-white hover:text-cyan-400 transition-colors duration-300"
+                                >
+                                    {item}
+                                </a>
+                            ))}
+                        </div>
+                    </div>
+                </nav>
+            </div>
+            <header className="relative w-full h-screen bg-cover bg-center" style={{ backgroundImage: "url('project-1.jpg')" }}>
+                {/* Overlay for darkening the image */}
+                <div className="absolute inset-0 bg-black/50"></div>
 
-  
-
-  
-
-      {/* Scroll to Top Button */}
-      <button 
-        className={`fixed bottom-8 right-8 bg-gradient-to-r from-cyan-500 to-purple-500 p-3 rounded-full shadow-lg transition-all duration-300 z-50 ${isScrolled ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
-        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-      >
-        <ArrowUp className="w-6 h-6 text-white" />
-      </button>
-
-      <style jsx>{`
-        @keyframes fade-in {
-          from { opacity: 0; transform: translateY(20px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        
-        @keyframes gradient {
-          0%, 100% { background-position: 0% 50%; }
-          50% { background-position: 100% 50%; }
-        }
-        
-        .animate-fade-in {
-          animation: fade-in 0.8s ease-out;
-        }
-        
-        .animate-gradient {
-          background-size: 200% 200%;
-          animation: gradient 3s ease infinite;
-        }
-        
-        .animation-delay-2000 {
-          animation-delay: 2s;
-        }
-      `}</style>
-    </div>
-  );
+                {/* Content */}
+                <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-4">
+                    <p className="text-green-500 text-lg mb-2">Best IT Solutions</p>
+                    <h1 className="text-white text-4xl md:text-6xl font-bold mb-4">
+                        An Innovative IT Solutions Agency
+                    </h1>
+                    <p className="text-gray-200 max-w-2xl mb-6">
+                        Lorem ipsum dolor sit amet elit. Sed efficitur quis purus ut interdum.
+                        Pellentesque aliquam dolor eget urna ultricies tincidunt.
+                    </p>
+                    <div className="flex gap-4 justify-center">
+                        <button className="bg-green-500 text-white px-6 py-2 rounded-lg hover:bg-green-600 transition">
+                            Read More
+                        </button>
+                        <button className="bg-blue-700 text-white px-6 py-2 rounded-lg hover:bg-blue-800 transition">
+                            Contact Us
+                        </button>
+                    </div>
+                </div>
+            </header>
+        </>
+    );
 }
