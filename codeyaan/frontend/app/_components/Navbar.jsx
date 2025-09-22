@@ -1,14 +1,15 @@
-"use client";
+'use client';
+
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { X, Menu, Code2, User } from "lucide-react";
-import SignUpLoginPage from "./SignupFrom"; // make sure this is the correct import
+import SignupForm from "./SignupForm"; // ✅ spelling check
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false); // single modal state
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const pathname = usePathname();
 
   const links = [
@@ -19,14 +20,12 @@ export default function Navbar() {
     { name: "Contact", href: "/contact" },
   ];
 
-  // Scroll handler
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 10);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Lock/unlock body scroll when modal opens/closes
   useEffect(() => {
     document.body.style.overflow = isModalOpen ? "hidden" : "auto";
   }, [isModalOpen]);
@@ -34,11 +33,12 @@ export default function Navbar() {
   return (
     <nav
       className={`fixed top-0 w-full z-50 transition-all duration-300 pr-4 ${
-        isScrolled ? "bg-slate-700/100 backdrop-blur-lg shadow-md" : "bg-transparent"
+        isScrolled
+          ? "bg-slate-700/100 backdrop-blur-lg shadow-md"
+          : "bg-transparent"
       }`}
     >
       <div className="w-full mx-auto flex items-center justify-between px-4 py-4">
-        {/* Logo */}
         <div className="flex items-center px-4 space-x-2">
           <Code2 className="text-white w-10 h-10 md:w-12 md:h-12" />
           <div className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent drop-shadow-2xl hover:scale-105 transition-transform duration-300 cursor-pointer">
@@ -60,10 +60,9 @@ export default function Navbar() {
             </Link>
           ))}
 
-          {/* SignUp/Login Button - Desktop */}
           <button
             onClick={() => setIsModalOpen(true)}
-            className="bg-cyan-500 text-white px-4 py-2 rounded"
+            className="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white font-semibold px-5 py-2 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-cyan-500/25"
           >
             Sign Up / Login
           </button>
@@ -99,7 +98,6 @@ export default function Navbar() {
             </Link>
           ))}
 
-          {/* SignUp/Login Button - Mobile */}
           <button
             onClick={() => {
               setIsMenuOpen(false);
@@ -113,8 +111,7 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Modal (Desktop + Mobile) */}
-      {isModalOpen && <SignUpLoginPage onClose={() => setIsModalOpen(false)} />}
+      {isModalOpen && <SignupForm onClose={() => setIsModalOpen(false)} />}
     </nav>
   );
 }
