@@ -37,13 +37,15 @@ export default function Footer() {
             <h4 className="text-lg font-semibold text-white mb-4">Contact</h4>
             <ul className="space-y-2">
               <li className="hover:text-cyan-400 transition-colors duration-300">
-                hello@labxcode.com
+                infowebservices2024@gmail.com
               </li>
               <li className="hover:text-cyan-400 transition-colors duration-300">
-                +91 98765 43210
+                +91 9871585013
               </li>
               <li className="hover:text-cyan-400 transition-colors duration-300">
-                Delhi, India
+                504, Space Time Management, 
+                Savitri Complex, GK-2, 
+                Delhi, India - 110048
               </li>
             </ul>
           </div>
