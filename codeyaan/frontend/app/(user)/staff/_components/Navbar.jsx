@@ -4,21 +4,25 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { X, Menu, Code2, User } from "lucide-react";
-import LoginForm from "./LoginForm";
+import LoginForm from '../../admin/dashboard/_components/LoginForm'
 
-export default function AdminNavbar() {
+export default function StaffNavbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const pathname = usePathname();
 
   const links = [
-  { name: "Payments", href: "/payments" },        
-  { name: "Analytics", href: "/analytics" },         
-  { name: "Manage Courses", href: "/manage-courses" }, 
-  { name: "Manage Users", href: "/manage-users" },   
-  { name: "Admin Dashboard", href: "/admin-dashboard" },
-];
+    { name: "Quizzes", href: "/quizzes" },
+    { name: "Assignments", href: "/Assignments" },
+    { name: "Upload Content", href: "/" },
+    { name: "Courses", href: "/courses" },
+    { name: "Reports", href: "/reports" },
+    { name: "Reports", href: "/reports" },
+    { name: "Notifications", href: "/notifications" },
+    { name: "Dashboard", href: "/dashboard" },
+
+  ];
 
 
   useEffect(() => {
@@ -33,11 +37,10 @@ export default function AdminNavbar() {
 
   return (
     <nav
-      className={`fixed top-0 w-full z-50 transition-all duration-300 pr-4 ${
-        isScrolled
-          ? "bg-slate-700/100 backdrop-blur-lg shadow-md"
-          : "bg-transparent"
-      }`}
+      className={`fixed top-0 w-full z-50 transition-all duration-300 pr-4 ${isScrolled
+        ? "bg-slate-700/100 backdrop-blur-lg shadow-md"
+        : "bg-transparent"
+        }`}
     >
       <div className="w-full mx-auto flex items-center justify-between px-4 py-4">
         <div className="flex items-center px-4 space-x-2">
@@ -53,9 +56,8 @@ export default function AdminNavbar() {
             <Link
               key={link.href}
               href={link.href}
-              className={`text-white hover:text-cyan-400 transition-colors duration-300 hover:scale-105 ${
-                pathname === link.href ? "text-cyan-400" : ""
-              }`}
+              className={`text-white hover:text-cyan-400 transition-colors duration-300 hover:scale-105 ${pathname === link.href ? "text-cyan-400" : ""
+                }`}
             >
               {link.name}
             </Link>
@@ -81,9 +83,8 @@ export default function AdminNavbar() {
 
       {/* Mobile Menu */}
       <div
-        className={`md:hidden transition-all duration-300 ${
-          isMenuOpen ? "max-h-80 opacity-100" : "max-h-0 opacity-0"
-        } overflow-hidden bg-slate-900/95 backdrop-blur-lg`}
+        className={`md:hidden transition-all duration-300 ${isMenuOpen ? "max-h-80 opacity-100" : "max-h-0 opacity-0"
+          } overflow-hidden bg-slate-900/95 backdrop-blur-lg`}
       >
         <div className="px-6 py-4 space-y-4">
           {links.map((link) => (
@@ -91,9 +92,8 @@ export default function AdminNavbar() {
               key={link.href}
               href={link.href}
               onClick={() => setIsMenuOpen(false)}
-              className={`block text-white text-2xl font-semibold hover:text-cyan-400 transition-colors duration-300 hover:scale-105 ${
-                pathname === link.href ? "text-cyan-400" : ""
-              }`}
+              className={`block text-white text-2xl font-semibold hover:text-cyan-400 transition-colors duration-300 hover:scale-105 ${pathname === link.href ? "text-cyan-400" : ""
+                }`}
             >
               {link.name}
             </Link>
