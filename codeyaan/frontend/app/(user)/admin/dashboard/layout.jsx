@@ -1,24 +1,10 @@
-import AdminNavbar from "./_components/Navbar";
-import SideNav from "./_components/SideNav";
 
+import MainLayout from "./_components/MainLayout"
 
-export default function DashboardLayout({ children }) {
-    return (
-        <>
-
-
-            <div className="h-screen flex flex-col">
-                {/* Top Header */}
-                <AdminNavbar />
-
-                <div className="flex ">
-                    <SideNav />
-                    {children}
-                </div>
-
-
-
-            </div>
-        </>
-    );
+export default function AdminLayout({ children }) {
+  return (
+    <MainLayout>
+      {children}
+    </MainLayout>
+  )
 }

@@ -165,3 +165,306 @@ export default function AdminNavbar() {
     </nav>
   )
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-------------------------------------------------------------------------------------
+
+
+// app/layout.js
+import './globals.css'
+
+export default function RootLayout({ children }) {
+  return (
+    <html lang="en">
+      <body>{children}</body>
+    </html>
+  )
+}
+
+// components/Navbar.js
+"use client"
+import React from 'react'
+
+export default function Navbar() {
+  return (
+    <nav className="fixed top-0 w-full h-20 bg-purple-600 text-white flex items-center justify-between px-6 z-50">
+      <div className="flex items-center gap-3">
+        <span className="text-xl">📚</span>
+        <h1 className="text-xl font-bold">Admin Panel</h1>
+      </div>
+      <div className="flex items-center gap-4">
+        <span className="cursor-pointer">🔔</span>
+        <span className="cursor-pointer">👤 Admin</span>
+      </div>
+    </nav>
+  )
+}
+
+// components/Sidebar.js
+"use client"
+import React from 'react'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+
+export default function Sidebar() {
+  const pathname = usePathname()
+  
+  const menuItems = [
+    { name: 'Dashboard', path: '/admin/dashboard', icon: '📊' },
+    { name: 'Payments', path: '/admin/payments', icon: '💰' },
+    { name: 'Courses', path: '/admin/courses', icon: '📚' },
+    { name: 'Users', path: '/admin/users', icon: '👥' },
+  ]
+
+  return (
+    <aside className="w-64 bg-black text-white">
+      <nav className="p-4 space-y-2">
+        {menuItems.map((item) => (
+          <Link key={item.path} href={item.path}>
+            <div className={`block p-3 rounded cursor-pointer transition-colors ${
+              pathname === item.path 
+                ? 'bg-purple-600' 
+                : 'bg-gray-800 hover:bg-purple-600'
+            }`}>
+              {item.icon} {item.name}
+            </div>
+          </Link>
+        ))}
+      </nav>
+    </aside>
+  )
+}
+
+// components/MainLayout.js
+"use client"
+import React from 'react'
+import Navbar from './Navbar'
+import Sidebar from './Sidebar'
+
+export default function MainLayout({ children }) {
+  return (
+    <>
+      <Navbar />
+      <div className="flex mt-20 h-screen">
+        <Sidebar />
+        <main className="flex-1 bg-gray-50 p-6 overflow-y-auto">
+          {children}
+        </main>
+      </div>
+    </>
+  )
+}
+
+// app/admin/layout.js
+import MainLayout from '@/components/MainLayout'
+
+export default function AdminLayout({ children }) {
+  return (
+    <MainLayout>
+      {children}
+    </MainLayout>
+  )
+}
+
+// app/admin/dashboard/page.js
+export default function Dashboard() {
+  return (
+    <div>
+      <h1 className="text-3xl font-bold mb-6">Dashboard</h1>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="bg-white p-6 rounded-lg shadow">
+          <h3 className="text-lg font-semibold">Total Students</h3>
+          <p className="text-2xl font-bold text-blue-600">1,234</p>
+        </div>
+        <div className="bg-white p-6 rounded-lg shadow">
+          <h3 className="text-lg font-semibold">Total Courses</h3>
+          <p className="text-2xl font-bold text-green-600">45</p>
+        </div>
+        <div className="bg-white p-6 rounded-lg shadow">
+          <h3 className="text-lg font-semibold">Revenue</h3>
+          <p className="text-2xl font-bold text-purple-600">₹2,45,000</p>
+        </div>
+        <div className="bg-white p-6 rounded-lg shadow">
+          <h3 className="text-lg font-semibold">Enrollments</h3>
+          <p className="text-2xl font-bold text-yellow-600">892</p>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+// app/admin/payments/page.js
+export default function Payments() {
+  const payments = [
+    { id: 1, student: 'Rahul Sharma', course: 'Web Dev', amount: 15000, status: 'Completed' },
+    { id: 2, student: 'Priya Singh', course: 'Data Science', amount: 25000, status: 'Pending' },
+    { id: 3, student: 'Amit Kumar', course: 'Mobile Dev', amount: 20000, status: 'Completed' },
+  ]
+
+  return (
+    <div>
+      <h1 className="text-3xl font-bold mb-6">Payments</h1>
+      <div className="bg-white rounded-lg shadow overflow-hidden">
+        <table className="w-full">
+          <thead className="bg-gray-50">
+            <tr>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Student</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Course</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Amount</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            {payments.map((payment) => (
+              <tr key={payment.id} className="border-t">
+                <td className="px-6 py-4 whitespace-nowrap">{payment.student}</td>
+                <td className="px-6 py-4 whitespace-nowrap">{payment.course}</td>
+                <td className="px-6 py-4 whitespace-nowrap">₹{payment.amount}</td>
+                <td className="px-6 py-4 whitespace-nowrap">
+                  <span className={`px-2 py-1 text-xs rounded-full ${
+                    payment.status === 'Completed' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'
+                  }`}>
+                    {payment.status}
+                  </span>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  )
+}
+
+// app/admin/courses/page.js
+"use client"
+import { useState } from 'react'
+
+export default function Courses() {
+  const [showModal, setShowModal] = useState(false)
+
+  const courses = [
+    { id: 1, name: 'Web Development', code: 'WD101', price: 15000 },
+    { id: 2, name: 'Data Science', code: 'DS201', price: 25000 },
+    { id: 3, name: 'Mobile Development', code: 'MD301', price: 20000 },
+  ]
+
+  return (
+    <div>
+      <div className="flex justify-between items-center mb-6">
+        <h1 className="text-3xl font-bold">Courses</h1>
+        <button 
+          onClick={() => setShowModal(true)}
+          className="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700"
+        >
+          Add Course
+        </button>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {courses.map((course) => (
+          <div key={course.id} className="bg-white p-6 rounded-lg shadow">
+            <h3 className="text-lg font-semibold mb-2">{course.name}</h3>
+            <p className="text-gray-600 mb-2">Code: {course.code}</p>
+            <p className="text-purple-600 font-bold">₹{course.price}</p>
+            <div className="flex gap-2 mt-4">
+              <button className="text-blue-600 hover:underline">Edit</button>
+              <button className="text-red-600 hover:underline">Delete</button>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Add Course Modal */}
+      {showModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white p-8 rounded-lg w-full max-w-md">
+            <h2 className="text-2xl font-bold mb-4">Add New Course</h2>
+            <form>
+              <div className="mb-4">
+                <label className="block text-sm font-medium mb-2">Course Name</label>
+                <input type="text" className="w-full p-2 border rounded" placeholder="Enter course name" />
+              </div>
+              <div className="mb-4">
+                <label className="block text-sm font-medium mb-2">Course Code</label>
+                <input type="text" className="w-full p-2 border rounded" placeholder="e.g., CS101" />
+              </div>
+              <div className="mb-4">
+                <label className="block text-sm font-medium mb-2">Price</label>
+                <input type="number" className="w-full p-2 border rounded" placeholder="Enter price" />
+              </div>
+              <div className="flex justify-end gap-2">
+                <button 
+                  type="button" 
+                  onClick={() => setShowModal(false)}
+                  className="px-4 py-2 border rounded hover:bg-gray-50"
+                >
+                  Cancel
+                </button>
+                <button 
+                  type="submit" 
+                  className="px-4 py-2 bg-purple-600 text-white rounded hover:bg-purple-700"
+                >
+                  Add Course
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+    </div>
+  )
+}
+
+// app/admin/users/page.js
+export default function Users() {
+  const users = [
+    { id: 1, name: 'Rahul Sharma', email: 'rahul@example.com', role: 'Student' },
+    { id: 2, name: 'Priya Singh', email: 'priya@example.com', role: 'Student' },
+    { id: 3, name: 'Dr. Kumar', email: 'kumar@example.com', role: 'Instructor' },
+  ]
+
+  return (
+    <div>
+      <h1 className="text-3xl font-bold mb-6">Users</h1>
+      <div className="bg-white rounded-lg shadow overflow-hidden">
+        <table className="w-full">
+          <thead className="bg-gray-50">
+            <tr>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Name</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Email</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Role</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {users.map((user) => (
+              <tr key={user.id} className="border-t">
+                <td className="px-6 py-4 whitespace-nowrap">{user.name}</td>
+                <td className="px-6 py-4 whitespace-nowrap">{user.email}</td>
+                <td className="px-6 py-4 whitespace-nowrap">{user.role}</td>
+                <td className="px-6 py-4 whitespace-nowrap">
+                  <button className="text-blue-600 hover:underline mr-2">Edit</button>
+                  <button className="text-red-600 hover:underline">Delete</button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  )
+}
