@@ -1,23 +1,87 @@
 import React from 'react'
-import { Code, Palette, Server, Smartphone } from 'lucide-react';
-
+import { Code, Palette, Server, Smartphone, Globe, TrendingUp, ArrowRight, CheckCircle } from 'lucide-react';
 
 export default function Cards() {
-     const services = [
-    { icon: Code, title: 'Web Development', desc: 'Modern, responsive websites built with cutting-edge technology' },
-    { icon: Smartphone, title: 'Mobile Apps', desc: 'Native and cross-platform mobile applications' },
-    { icon: Palette, title: 'UI/UX Design', desc: 'Beautiful, intuitive user interfaces and experiences' },
-    { icon: Server, title: 'Server Solutions', desc: 'Robust backend infrastructure and hosting services' }
+  const services = [
+    {
+      icon: Globe,
+      title: "Web Development",
+      description: "Modern, responsive websites that drive business growth and deliver exceptional user experiences",
+      features: ["Responsive Design", "SEO Optimized", "Fast Loading", "Secure & Reliable"],
+      price: "₹15,000+",
+      gradient: "from-blue-500 to-cyan-500"
+    },
+    {
+      icon: Smartphone,
+      title: "Mobile Apps",
+      description: "Native and cross-platform mobile applications that engage users across all devices",
+      features: ["iOS & Android", "Cross-Platform", "App Store Ready", "Push Notifications"],
+      price: "₹25,000+",
+      gradient: "from-purple-500 to-pink-500"
+    },
+    {
+      icon: Palette,
+      title: "UI/UX Design",
+      description: "User-focused designs that convert visitors to customers with stunning visual experiences",
+      features: ["User Research", "Prototyping", "Design Systems", "Accessibility"],
+      price: "₹8,000+",
+      gradient: "from-green-500 to-emerald-500"
+    },
+    {
+      icon: TrendingUp,
+      title: "Digital Marketing",
+      description: "Boost your online presence with targeted strategies that deliver measurable results",
+      features: ["SEO Optimization", "Social Media", "Content Strategy", "Analytics"],
+      price: "₹5,000+",
+      gradient: "from-orange-500 to-red-500"
+    }
   ];
 
-
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-      {services.map((service) => (
-        <div key={service.title} className="bg-white rounded-lg shadow-md p-4">
-          <service.icon className="w-12 h-12 text-cyan-500 mb-2" />
-          <h3 className="text-xl font-semibold">{service.title}</h3>
-          <p className="text-gray-600">{service.desc}</p>
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+      {services.map((service, index) => (
+        <div
+          key={service.title}
+          className="group relative rounded-2xl p-6 lg:p-8 transition-all duration-500 shadow-2xl  hover:scale-105  overflow-hidden"
+        > 
+          <div className="relative z-10 flex flex-col h-full">
+            {/* Icon */}
+            <div className={`w-12 h-12 lg:w-14 lg:h-14 rounded-2xl bg-gradient-to-br ${service.gradient} p-3 mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
+              <service.icon className="w-full h-full text-white" />
+            </div>
+            
+            {/* Content */}
+            <div className="flex-grow">
+              <h3 className="text-lg lg:text-xl font-bold text-black mb-3 group-hover:text-orange-500 transition-colors duration-300">
+                {service.title}
+              </h3>
+              
+              <p className="text-gray-800 text-sm lg:text-base mb-6 leading-relaxed line-clamp-3">
+                {service.description}
+              </p>
+              
+              {/* Features */}
+              <div className="space-y-2 mb-6">
+                {service.features.map((feature, featureIndex) => (
+                  <div key={featureIndex} className="flex items-center gap-3 group-hover:translate-x-1 transition-transform duration-300" style={{ transitionDelay: `${featureIndex * 50}ms` }}>
+                    <CheckCircle className="w-4 h-4 text-green-400 flex-shrink-0" />
+                    <span className="text-gray-800 text-xs lg:text-sm">{feature}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+            
+            {/* Footer */}
+            <div className="pt-4 border-t border-white/10">
+              <button className={`w-full bg-gradient-to-r ${service.gradient} text-white py-3 px-4 rounded-full font-semibold text-sm lg:text-base hover:shadow-lg hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2 group-hover:shadow-xl`}>
+                Get Started
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
+              </button>
+            </div>
+          </div>
+          
+          {/* Shine Effect */}
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out"></div>
         </div>
       ))}
     </div>
