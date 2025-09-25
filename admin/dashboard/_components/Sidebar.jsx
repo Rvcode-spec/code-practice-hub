@@ -24,7 +24,7 @@ export default function Sidebar() {
   ]
 
   return (
-    <div className="fixed left-0 top-20 w-72 h-screen bg-black shadow-2xl z-40 overflow-y-auto border-r border-gray-200">
+      <div className="lg:hidden flex items-center justify-between p-3 sm:p-4 bg-white shadow-md fixed top-0 left-0 right-0 z-40 border-b border-gray-200">
       {/* Navigation Menu */}
       <div className="grid p-4 py-6 md:gap-3 w-72 space-y-6">
         {MenuOption.map((item, index) => (
