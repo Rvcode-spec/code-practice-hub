@@ -4,7 +4,7 @@ import { Bell, User, Menu } from 'lucide-react'
 export default function Header({ MenuOpen, setMenuOpen }) {
   return (
     <div className='p-4 flex justify-between items-center h-24 shadow-xl bg-amber-50 border-b border-amber-200'>
-      <h1 className='text-4xl flex px-7 w-1/4 h-24 items-center font-bold bg-amber-400'>Codeyaan</h1>
+      <h1 className='text-4xl flex px-7 w-1/4 h-24 items-center font-bold'>Codeyaan</h1>
      
       {/* Right side icons */}
       <div className='flex items-center gap-4'>

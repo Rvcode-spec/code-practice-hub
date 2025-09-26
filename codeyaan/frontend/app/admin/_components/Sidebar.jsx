@@ -28,7 +28,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
 
-export default function Sidebar({MenuOpen, setMenuOpen}) {
+export default function Sidebar({ MenuOpen, setMenuOpen, onSelect }) {
   const path = usePathname();
 
 
@@ -36,7 +36,6 @@ export default function Sidebar({MenuOpen, setMenuOpen}) {
     {
       title: "Main",
       items: [
-        { id: 1, name: 'Dashboard', path: '/admin/dashboard', icon: PanelsTopLeft },
         { id: 2, name: 'Overview', path: '/admin/overview', icon: Eye },
         { id: 3, name: 'Analytics', path: '/admin/analytics', icon: BarChart3 },
       ]
@@ -97,11 +96,11 @@ export default function Sidebar({MenuOpen, setMenuOpen}) {
   return (
     <>
 
-    {/* Mobile Overlay */}
-     
+      {/* Mobile Overlay */}
+
       {MenuOpen && (
-        <div 
-           className="md:hidden fixed inset-0 bg-gray-100/80 backdrop-blur-sm z-40"
+        <div
+          className="md:hidden fixed inset-0 bg-gray-100/80 backdrop-blur-sm z-20"
           onClick={() => setMenuOpen(false)}
         />
       )}
@@ -109,15 +108,13 @@ export default function Sidebar({MenuOpen, setMenuOpen}) {
       {/* Mobile Sidebar */}
       {MenuOpen && (
         <div className="fixed z-50 top-0 left-0 h-full w-64 bg-gradient-to-b from-amber-50 to-orange-50 border-r border-amber-200 overflow-y-auto md:hidden transition-transform duration-300">
-        <div className='relative h-full '>
-        </div>
-         <button
-      className="absolute top-4 right-4 p-2 rounded-full hover:bg-amber-200 transition-colors"
-      onClick={() => setMenuOpen(false)}
-      aria-label="Close sidebar"
-    >
-      <X size={24} className="text-amber-700" />
-    </button>
+          <button
+            className="absolute top-4 right-4 p-2 rounded-full hover:bg-amber-200 transition-colors"
+            onClick={() => setMenuOpen(false)}
+            aria-label="Close sidebar"
+          >
+            <X size={24} className="text-amber-700" />
+          </button>
           {/* Logo/Brand Section */}
           <div className="p-6 border-b border-amber-200">
             <h1 className="text-xl font-bold text-gray-800">Codeyaan</h1>
@@ -136,17 +133,17 @@ export default function Sidebar({MenuOpen, setMenuOpen}) {
                                     transition-all duration-200
                                     hover:bg-purple-100 hover:shadow-sm
                                     group
-                                    ${path === item.path 
-                                      ? 'bg-purple-600 text-white shadow-md' 
-                                      : 'text-gray-700 hover:text-purple-700'
-                                    }`}
+                                    ${path === item.path
+                            ? 'bg-purple-600 text-white shadow-md'
+                            : 'text-gray-700 hover:text-purple-700'
+                          }`}
                       >
-                        <item.icon 
+                        <item.icon
                           className={`w-5 h-5 transition-colors duration-200
-                                      ${path === item.path 
-                                        ? 'text-white' 
-                                        : 'text-gray-500 group-hover:text-purple-600'
-                                      }`} 
+                                      ${path === item.path
+                              ? 'text-white'
+                              : 'text-gray-500 group-hover:text-purple-600'
+                            }`}
                         />
                         <span className="text-sm font-medium">{item.name}</span>
                         {path === item.path && (
@@ -173,7 +170,7 @@ export default function Sidebar({MenuOpen, setMenuOpen}) {
           </div>
         </div>
       )}
-      
+
 
       {/* Sidebar - Hidden on mobile, visible on desktop */}
       <div className="hidden z-40 md:flex md:flex-col w-64 md:w-74 bg-gradient-to-b from-amber-50 to-orange-50 border-r border-amber-200 h-screen overflow-y-auto">
@@ -190,27 +187,27 @@ export default function Sidebar({MenuOpen, setMenuOpen}) {
               {/* Section Items */}
               <div className="space-y-1">
                 {section.items.map((item, index) => (
-                  <Link href={item.path} key={item.id}>
+                  <Link href={item.path} key={item.id} onClick={() => onSelect(item.name)}>
                     <div
                       className={`flex items-center gap-4 px-4 py-3 my-2 md:text-xl
                                   rounded-lg cursor-pointer
                                   transition-all duration-200
                                   hover:bg-purple-100 hover:shadow-sm
                                   group
-                                  ${path === item.path 
-                                    ? 'bg-purple-600 text-white shadow-md' 
-                                    : 'text-gray-700 hover:text-purple-700'
-                                  }`}
+                                  ${path === item.path
+                          ? 'bg-purple-600 text-white shadow-md'
+                          : 'text-gray-700 hover:text-purple-700'
+                        }`}
                     >
-                      <item.icon 
+                      <item.icon
                         className={`w-5 h-5 transition-colors duration-200
-                                    ${path === item.path 
-                                      ? 'text-white' 
-                                      : 'text-gray-500 group-hover:text-purple-600'
-                                    }`} 
+                                    ${path === item.path
+                            ? 'text-white'
+                            : 'text-gray-500 group-hover:text-purple-600'
+                          }`}
                       />
                       <span className="text-md font-medium">{item.name}</span>
-                      
+
                       {/* Active indicator */}
                       {path === item.path && (
                         <div className="ml-auto w-2 h-2 bg-white rounded-full"></div>

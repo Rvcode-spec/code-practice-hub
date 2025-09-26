@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function AdminDashboard() {
+export default function AdminOverviewPage() {
   return (
 
     <div className='bg-amber-50 h-screen'>
