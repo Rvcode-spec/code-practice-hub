@@ -25,11 +25,11 @@ export default function Navbar() {
 
   return (
     <nav
-      className={`fixed top-0 w-full z-50 transition-all duration-300 pr-4 ${
-        isScrolled
-          ? "bg-slate-700/100 backdrop-blur-lg shadow-md"
-          : "bg-transparent"
-      }`}
+      className={`fixed top-0 w-full z-50 pr-4 transition-all duration-300 shadow-md
+         ${isScrolled
+          ? "bg-slate-700/100 backdrop-blur-lg text-white shadow-md"
+          : "bg-transparent text-black  "
+        }`}
     >
       <div className="w-full  mx-auto flex items-center justify-between px-4 py-4">
         {/* Logo */}
@@ -46,9 +46,8 @@ export default function Navbar() {
             <Link
               key={link.href}
               href={link.href}
-              className={`text-white hover:text-cyan-400 transition-colors duration-300 hover:scale-105 ${
-                pathname === link.href ? "text-cyan-400" : ""
-              }`}
+              className={` hover:text-orange-400 transition-colors duration-300 hover:scale-105 ${pathname === link.href ? "text-orange-400" : ""
+                }`}
             >
               {link.name}
             </Link>
@@ -67,9 +66,8 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       <div
-        className={`md:hidden transition-all duration-300 ${
-          isMenuOpen ? "max-h-64 opacity-100" : "max-h-0 opacity-0"
-        } overflow-hidden bg-slate-900/95 backdrop-blur-lg`}
+        className={`md:hidden transition-all duration-300 ${isMenuOpen ? "max-h-64 opacity-100" : "max-h-0 opacity-0"
+          } overflow-hidden bg-slate-900/95 backdrop-blur-lg`}
       >
         <div className="px-6 py-4 space-y-4">
           {links.map((link) => (
@@ -77,9 +75,8 @@ export default function Navbar() {
               key={link.href}
               href={link.href}
               onClick={() => setIsMenuOpen(false)} // Close on click
-              className={`block text-white text-2xl font-semibold hover:text-cyan-400 transition-colors duration-300 hover:scale-105 ${
-                pathname === link.href ? "text-cyan-400" : ""
-              }`}
+              className={`block text-white text-2xl font-semibold hover:text-cyan-400 transition-colors duration-300 hover:scale-105 ${pathname === link.href ? "text-cyan-400" : ""
+                }`}
             >
               {link.name}
             </Link>

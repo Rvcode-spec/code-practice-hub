@@ -132,17 +132,16 @@ export default function ServicesPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+    <div className="min-h-screen bg-amber-100">
       {/* Hero Section */}
       <div className="relative overflow-hidden min-h-[60vh] flex items-center">
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-purple-600/20"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-purple-600/20 blur-2xl opacity-20"></div>
         <div className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
           <div className="text-center">
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
-              Our <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">Services</span>
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-black mb-6 leading-tight">
+              Our <span className="text-orange-400">Services</span>
             </h1>
-            <div className="w-24 h-1 bg-gradient-to-r from-blue-400 to-purple-400 mx-auto mb-8 rounded-full"></div>
-            <p className="text-lg sm:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed px-4">
+            <p className="text-lg sm:text-xl text-gray-900 max-w-3xl mx-auto leading-relaxed px-4">
               Comprehensive digital solutions to transform your business and drive growth in the digital age
             </p>
           </div>
@@ -152,8 +151,8 @@ export default function ServicesPage() {
       {/* Main Services Tabs */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-white mb-6">Core Services</h2>
-          <p className="text-xl text-gray-300">Choose the service that fits your needs</p>
+          <h2 className="text-4xl font-bold text-orange-400 mb-6">Core Services</h2>
+          <p className="text-xl text-gray-900">Choose the service that fits your needs</p>
         </div>
 
         {/* Service Tabs */}
@@ -162,10 +161,10 @@ export default function ServicesPage() {
             <button
               key={service.id}
               onClick={() => setActiveTab(service.id)}
-              className={`px-4 sm:px-6 py-2 sm:py-3 rounded-full font-semibold transition-all duration-300 text-sm sm:text-base ${
+              className={`px-4 sm:px-6 py-2 sm:py-3 rounded-full font-semibold transition-all hover:scale-105  duration-300 text-xl  ${
                 activeTab === service.id
-                  ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-lg'
-                  : 'bg-white/10 text-gray-300 hover:bg-white/20'
+                  ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-lg '
+                  : 'bg-white/10 text-gray-700 hover:text-orange-400 hover:text-xl'
               }`}
             >
               {service.title}
@@ -181,25 +180,20 @@ export default function ServicesPage() {
                 <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 p-6 sm:p-8 lg:p-12">
                   <div className="space-y-6">
                     <div className="text-blue-400 w-10 h-10 sm:w-12 sm:h-12">{service.icon}</div>
-                    <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white leading-tight">{service.title}</h3>
-                    <p className="text-lg sm:text-xl text-purple-300">{service.subtitle}</p>
-                    <p className="text-gray-300 text-base sm:text-lg leading-relaxed">{service.description}</p>
+                    <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-orange-400 leading-tight">{service.title}</h3>
+                    <p className="text-lg sm:text-xl text-purple-700">{service.subtitle}</p>
+                    <p className="text-gray-900 text-base sm:text-lg leading-relaxed">{service.description}</p>
                     
                     <div>
-                      <h4 className="text-lg sm:text-xl font-semibold text-white mb-4">Key Features:</h4>
+                      <h4 className="text-lg sm:text-xl font-semibold text-black mb-4">Key Features:</h4>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         {service.features.map((feature, index) => (
                           <div key={index} className="flex items-center gap-3">
                             <Check className="w-4 h-4 sm:w-5 sm:h-5 text-green-400 flex-shrink-0" />
-                            <span className="text-gray-300 text-sm sm:text-base">{feature}</span>
+                            <span className="text-gray-900 text-sm sm:text-base">{feature}</span>
                           </div>
                         ))}
                       </div>
-                    </div>
-
-                    <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
-                      <span className="text-xl sm:text-2xl font-bold text-white">{service.startingPrice}</span>
-                      <span className="text-gray-400 text-sm sm:text-base">Starting Price</span>
                     </div>
 
                     <button className="w-full sm:w-auto bg-gradient-to-r from-blue-500 to-purple-500 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold hover:scale-105 transition-transform duration-300 flex items-center justify-center gap-2 text-sm sm:text-base">
@@ -209,10 +203,10 @@ export default function ServicesPage() {
 
                   <div className="space-y-6 sm:space-y-8">
                     <div className="bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-xl sm:rounded-2xl p-6 sm:p-8">
-                      <h4 className="text-lg sm:text-xl font-semibold text-white mb-4">Technologies We Use:</h4>
+                      <h4 className="text-lg sm:text-xl font-semibold text-orange-400 mb-4">Technologies We Use:</h4>
                       <div className="flex flex-wrap gap-2 sm:gap-3">
                         {service.technologies.map((tech, index) => (
-                          <span key={index} className="bg-white/10 text-blue-300 px-3 sm:px-4 py-1 sm:py-2 rounded-full text-xs sm:text-sm">
+                          <span key={index} className="bg-white/10 text-blue-900 px-3 sm:px-4 py-1 sm:py-2 rounded-full text-sm sm:text-md">
                             {tech}
                           </span>
                         ))}
@@ -221,16 +215,16 @@ export default function ServicesPage() {
 
                     <div className="space-y-3 sm:space-y-4">
                       <div className="bg-white/5 rounded-lg sm:rounded-xl p-4 sm:p-6">
-                        <h5 className="font-semibold text-white mb-2 text-sm sm:text-base">Project Timeline</h5>
-                        <p className="text-gray-300 text-sm sm:text-base">2-8 weeks depending on complexity</p>
+                        <h5 className="font-semibold text-black mb-2 text-sm sm:text-base">Project Timeline</h5>
+                        <p className="text-gray-900 text-sm sm:text-base">2-8 weeks depending on complexity</p>
                       </div>
                       <div className="bg-white/5 rounded-lg sm:rounded-xl p-4 sm:p-6">
-                        <h5 className="font-semibold text-white mb-2 text-sm sm:text-base">Support Included</h5>
-                        <p className="text-gray-300 text-sm sm:text-base">3 months free support & maintenance</p>
+                        <h5 className="font-semibold text-black mb-2 text-sm sm:text-base">Support Included</h5>
+                        <p className="text-gray-900 text-sm sm:text-base">3 months free support & maintenance</p>
                       </div>
                       <div className="bg-white/5 rounded-lg sm:rounded-xl p-4 sm:p-6">
-                        <h5 className="font-semibold text-white mb-2 text-sm sm:text-base">Revisions</h5>
-                        <p className="text-gray-300 text-sm sm:text-base">Unlimited revisions until satisfaction</p>
+                        <h5 className="font-semibold text-black mb-2 text-sm sm:text-base">Revisions</h5>
+                        <p className="text-gray-900 text-sm sm:text-base">Unlimited revisions until satisfaction</p>
                       </div>
                     </div>
                   </div>
@@ -245,8 +239,8 @@ export default function ServicesPage() {
       <div className="bg-white/5 backdrop-blur-sm py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-white mb-6">Additional Services</h2>
-            <p className="text-xl text-gray-300">Extended solutions for comprehensive digital transformation</p>
+            <h2 className="text-4xl font-bold text-orange-400 mb-6">Additional Services</h2>
+            <p className="text-xl text-gray-900">Extended solutions for comprehensive digital transformation</p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
@@ -255,9 +249,8 @@ export default function ServicesPage() {
                 <div className="text-blue-400 group-hover:text-purple-400 transition-colors duration-300 mb-4 w-6 h-6 sm:w-8 sm:h-8">
                   {service.icon}
                 </div>
-                <h3 className="text-lg sm:text-xl font-semibold text-white mb-3 leading-tight">{service.title}</h3>
-                <p className="text-gray-300 mb-4 text-sm sm:text-base leading-relaxed">{service.description}</p>
-                <p className="text-blue-300 font-semibold text-sm sm:text-base">{service.price}</p>
+                <h3 className="text-lg sm:text-xl font-semibold text-orange-400 mb-3 leading-tight">{service.title}</h3>
+                <p className="text-gray-900 mb-4 text-sm sm:text-base leading-relaxed">{service.description}</p>
               </div>
             ))}
           </div>
@@ -267,8 +260,8 @@ export default function ServicesPage() {
       {/* Process Section */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-white mb-6">Our Process</h2>
-          <p className="text-xl text-gray-300">How we deliver exceptional results</p>
+          <h2 className="text-4xl font-bold text-orange-400 mb-6">Our Process</h2>
+          <p className="text-xl text-gray-900">How we deliver exceptional results</p>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
@@ -277,19 +270,19 @@ export default function ServicesPage() {
               <div className="bg-gradient-to-r from-blue-500 to-purple-500 w-16 h-16 sm:w-20 sm:h-20 rounded-2xl sm:rounded-3xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
                 <span className="text-lg sm:text-2xl font-bold text-white">{step.step}</span>
               </div>
-              <h3 className="text-lg sm:text-xl font-semibold text-white mb-4 leading-tight">{step.title}</h3>
-              <p className="text-gray-300 leading-relaxed text-sm sm:text-base">{step.description}</p>
+              <h3 className="text-lg sm:text-xl font-semibold text-black mb-4 leading-tight">{step.title}</h3>
+              <p className="text-gray-900 leading-relaxed text-sm sm:text-base">{step.description}</p>
             </div>
           ))}
         </div>
       </div>
 
       {/* Testimonials */}
-      <div className="bg-gradient-to-r from-blue-900/30 to-purple-900/30 py-20">
+      <div className="bg-gradient-to-r from-blue-900/30 to-purple-900/30 via-blue-400 py-20 ">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-white mb-6">What Our Clients Say</h2>
-            <p className="text-xl text-gray-300">Don't just take our word for it</p>
+            <h2 className="text-4xl font-bold text-orange-400 mb-6">What Our Clients Say</h2>
+            <p className="text-xl text-gray-100">Don't just take our word for it</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
@@ -300,10 +293,10 @@ export default function ServicesPage() {
                     <Star key={i} className="w-4 h-4 sm:w-5 sm:h-5 fill-yellow-400 text-yellow-400" />
                   ))}
                 </div>
-                <p className="text-gray-300 mb-6 italic text-sm sm:text-base leading-relaxed">"{testimonial.text}"</p>
+                <p className="text-gray-900 mb-6 italic text-sm sm:text-base leading-relaxed">"{testimonial.text}"</p>
                 <div>
                   <p className="font-semibold text-white text-sm sm:text-base">{testimonial.name}</p>
-                  <p className="text-blue-300 text-xs sm:text-sm">{testimonial.company}</p>
+                  <p className="text-blue-900 text-xs sm:text-sm">{testimonial.company}</p>
                 </div>
               </div>
             ))}
@@ -315,20 +308,20 @@ export default function ServicesPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-8 text-center">
           <div>
-            <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-2">150+</div>
-            <div className="text-gray-400 text-sm sm:text-base">Projects Completed</div>
+            <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-black mb-2">150+</div>
+            <div className="text-gray-900 text-sm sm:text-base">Projects Completed</div>
           </div>
           <div>
             <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-blue-400 mb-2">50+</div>
-            <div className="text-gray-400 text-sm sm:text-base">Happy Clients</div>
+            <div className="text-gray-900 text-sm sm:text-base">Happy Clients</div>
           </div>
           <div>
             <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-purple-400 mb-2">24/7</div>
-            <div className="text-gray-400 text-sm sm:text-base">Support Available</div>
+            <div className="text-gray-900 text-sm sm:text-base">Support Available</div>
           </div>
           <div>
             <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-green-400 mb-2">99%</div>
-            <div className="text-gray-400 text-sm sm:text-base">Client Satisfaction</div>
+            <div className="text-gray-900 text-sm sm:text-base">Client Satisfaction</div>
           </div>
         </div>
       </div>
