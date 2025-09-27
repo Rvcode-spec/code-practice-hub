@@ -117,11 +117,8 @@ export default function Home() {
                     </p>
 
                     <div className="flex flex-col sm:flex-row gap-4 mb-12 animate-slide-up delay-500">
-                        <button className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-full font-semibold text-lg hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2 shadow-2xl">
+                        <button className="bg-gradient-to-r from-green-600 to-blue-900 text-white px-8 py-4 rounded-full font-semibold text-lg hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2 shadow-2xl">
                             Get Started <ArrowRight className="w-5 h-5" />
-                        </button>
-                        <button className="border-2 bg-gradient-to-r from-orange-400 to-purple-600 text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-orange-400 hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2 shadow-2xl backdrop-blur-sm">
-                            <Play className="w-5 h-5" /> Watch Demo
                         </button>
                     </div>
 
@@ -166,8 +163,8 @@ export default function Home() {
                 <div className="max-w-7xl mx-auto">
                     <div className="grid lg:grid-cols-2 gap-12 items-center">
                         <div>
-                            <h2 className="text-4xl sm:text-5xl font-bold text-violet-500 mb-6">
-                                About <span className="text-amber-600">LabXCode</span>
+                            <h2 className="text-4xl sm:text-5xl font-bold text-green-800 mb-6">
+                                About <span className="text-blue-900">LabXCode</span>
                             </h2>
                             <p className="text-gray-900 text-lg leading-relaxed mb-6">
                                 Founded on October 20, 2025, LabXCode is a fast-growing IT company with a clear vision - to empower businesses with powerful and innovative digital solutions. We transform small dreams into impactful digital realities.
@@ -175,7 +172,7 @@ export default function Home() {
                             <p className="text-gray-900 text-lg leading-relaxed mb-8">
                                 Our team blends creativity, technical expertise, and industry experience to deliver results that take your business beyond expectations. We don't just create IT solutions; we bring your ideas to life.
                             </p>
-                            <button className="bg-gradient-to-r from-blue-500 to-purple-500 text-white px-8 py-4 rounded-full font-semibold hover:scale-105 transition-transform duration-300 flex items-center gap-2">
+                            <button className="bg-gradient-to-r from-blue-900 to-green-600 text-white  px-8 py-4 rounded-full font-semibold hover:scale-105 transition-transform duration-300 flex items-center gap-2">
                                 Learn More <ArrowRight className="w-5 h-5" />
                             </button>
                         </div>
@@ -205,8 +202,8 @@ export default function Home() {
             <section id="services" className="py-24 px-4 sm:px-6 lg:px-8 ">
                 <div className="max-w-7xl mx-auto">
                     <div className="text-center mb-16">
-                        <h2 className="text-4xl sm:text-5xl font-bold text-black mb-6">
-                            Our <span className="text-amber-600">Services</span>
+                        <h2 className="text-4xl sm:text-5xl font-bold text-green-800 mb-6">
+                            Our <span className="text-blue-900">Services</span>
                         </h2>
                         <p className="text-xl text-gray-800 max-w-3xl mx-auto">
                             Comprehensive digital solutions to transform your business and drive growth in the digital age
@@ -220,7 +217,7 @@ export default function Home() {
             <section className="py-24 px-4 sm:px-6 lg:px-8">
                 <div className="max-w-7xl mx-auto">
                     <div className="text-center mb-16">
-                        <h2 className="text-4xl font-bold text-black mb-6">What Our Clients Say</h2>
+                        <h2 className="text-4xl font-bold text-green-800 mb-6">What Our Clients Say</h2>
                         <p className="text-xl text-gray-700">Don't just take our word for it</p>
                     </div>
 
@@ -232,10 +229,10 @@ export default function Home() {
                                         <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
                                     ))}
                                 </div>
-                                <p className="text-gray-800 mb-6 italic">"{testimonial.text}"</p>
+                                <p className="text-gray-800 mb-6 italic">{testimonial.text}</p>
                                 <div>
                                     <p className="font-semibold text-white">{testimonial.name}</p>
-                                    <p className="text-amber-600 text-md">{testimonial.company}</p>
+                                    <p className="text-blue-900 font-bold text-md">{testimonial.company}</p>
                                 </div>
                             </div>
                         ))}
@@ -246,15 +243,15 @@ export default function Home() {
            
 
             {/* CTA Section */}
-            <section className="bg-gradient-to-r from-blue-600 to-purple-600 py-16">
+            <section className="bg-gradient-to-r from-blue-900 to-green-600 py-16">
                 <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
                     <h2 className="text-3xl font-bold text-white mb-6">Ready to Transform Your Business?</h2>
                     <p className="text-xl text-blue-100 mb-8">Join 50+ satisfied clients who trust LabXCode for their digital success</p>
                     <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                        <button className="bg-white text-purple-600 px-8 py-4 rounded-full font-semibold text-lg hover:bg-gray-100 transition-colors duration-300 flex items-center justify-center gap-2">
+                        <button className="bg-white text-blue-800 px-8 py-4 rounded-full font-semibold text-lg hover:bg-gray-100 hover:scale-105 transition-colors duration-300 flex items-center justify-center gap-2">
                             <MessageSquare className="w-5 h-5" /> Start Your Project
                         </button>
-                        <button className="border-2 border-white text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-white hover:text-purple-600 transition-all duration-300">
+                        <button className="border-2 border-white text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-white hover:text-green-900 transition-all duration-300">
                             View Portfolio
                         </button>
                     </div>

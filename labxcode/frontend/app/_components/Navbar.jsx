@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { X, Menu, Sparkles } from "lucide-react";
+import { X, Menu, Sparkles, Code, Settings } from "lucide-react";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -27,26 +27,36 @@ export default function Navbar() {
     <nav
       className={`fixed top-0 w-full z-50 pr-4 transition-all duration-300 shadow-md
          ${isScrolled
-          ? "bg-slate-700/100 backdrop-blur-lg text-white shadow-md"
-          : "bg-transparent text-black  "
+        ?"bg-blue-950/70 backdrop-blur-sm text-white shadow-lg transform -translate-y-0"
+          : "bg-transparent  bg-white text-black"
         }`}
     >
-      <div className="w-full  mx-auto flex items-center justify-between px-4 py-4">
-        {/* Logo */}
-        <div className="flex items-center px-4 space-x-2">
-          <Sparkles className="text-cyan-400 w-8 h-8 animate-pulse" />
-          <div className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent drop-shadow-2xl hover:scale-105 transition-transform duration-300 cursor-pointer">
-            LabXCode
+      <div className="w-full mx-auto flex items-center justify-between px-4 py-4">
+        
+        {/* Logo Section */}
+        <div className="flex items-center space-x-3 cursor-pointer">
+          <div className="relative">
+            <div className="w-14 h-14 bg-gradient-to-br from-blue-600 to-green-800 rounded-xl flex items-center justify-center shadow-lg">
+              <div className="relative">
+                <Code className="w-7 h-7 text-white" strokeWidth={2} />
+                <div className="absolute -top-1 -right-1 w-5 h-5 bg-orange-700 rounded-full flex items-center justify-center">
+                  <Settings className="w-3 h-3 text-white" strokeWidth={2.5} />
+                </div>
+              </div>
+            </div>
           </div>
+          <span className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-blue-500 to-green-400 bg-clip-text text-transparent">
+            LabXCode
+          </span>
         </div>
 
         {/* Desktop Links */}
-        <div className="hidden md:flex space-x-8 text-xl font-semibold ml-auto">
+        <div className="hidden md:flex space-x-8 text-lg font-semibold ml-auto">
           {links.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className={` hover:text-orange-400 transition-colors duration-300 hover:scale-105 ${pathname === link.href ? "text-orange-400" : ""
+              className={`hover:text-blue-800 text-xl transition-colors duration-300 hover:scale-105 ${pathname === link.href ? "text-blue-700" : ""
                 }`}
             >
               {link.name}
@@ -56,7 +66,7 @@ export default function Navbar() {
 
         {/* Mobile Toggle */}
         <button
-          className="md:hidden text-white ml-auto"
+          className="md:hidden ml-auto"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           aria-label="Toggle menu"
         >
@@ -74,8 +84,8 @@ export default function Navbar() {
             <Link
               key={link.href}
               href={link.href}
-              onClick={() => setIsMenuOpen(false)} // Close on click
-              className={`block text-white text-2xl font-semibold hover:text-cyan-400 transition-colors duration-300 hover:scale-105 ${pathname === link.href ? "text-cyan-400" : ""
+              onClick={() => setIsMenuOpen(false)}
+              className={`block text-white text-xl font-semibold hover:text-cyan-400 transition-colors duration-300 ${pathname === link.href ? "text-cyan-400" : ""
                 }`}
             >
               {link.name}

@@ -8,32 +8,35 @@ export default function Cards() {
       title: "Web Development",
       description: "Modern, responsive websites that drive business growth and deliver exceptional user experiences",
       features: ["Responsive Design", "SEO Optimized", "Fast Loading", "Secure & Reliable"],
-      price: "₹15,000+",
-      gradient: "from-blue-500 to-cyan-500"
+
+      gradient: " from-blue-900 to-green-600",
+      iconColor: "bg-blue-600"
     },
     {
       icon: Smartphone,
       title: "Mobile Apps",
       description: "Native and cross-platform mobile applications that engage users across all devices",
       features: ["iOS & Android", "Cross-Platform", "App Store Ready", "Push Notifications"],
-      price: "₹25,000+",
-      gradient: "from-purple-500 to-pink-500"
+
+      gradient: " from-blue-900 to-green-600",
+      iconColor: "bg-green-600"
     },
     {
       icon: Palette,
       title: "UI/UX Design",
       description: "User-focused designs that convert visitors to customers with stunning visual experiences",
       features: ["User Research", "Prototyping", "Design Systems", "Accessibility"],
-      price: "₹8,000+",
-      gradient: "from-green-500 to-emerald-500"
+
+      gradient: " from-blue-900 to-green-600",
+      iconColor: "bg-blue-600"
     },
     {
       icon: TrendingUp,
       title: "Digital Marketing",
       description: "Boost your online presence with targeted strategies that deliver measurable results",
       features: ["SEO Optimization", "Social Media", "Content Strategy", "Analytics"],
-      price: "₹5,000+",
-      gradient: "from-orange-500 to-red-500"
+      gradient: " from-blue-900 to-green-600",
+      iconColor: "bg-green-600"
     }
   ];
 
@@ -43,23 +46,23 @@ export default function Cards() {
         <div
           key={service.title}
           className="group relative rounded-2xl p-6 lg:p-8 transition-all duration-500 shadow-2xl  hover:scale-105  overflow-hidden"
-        > 
+        >
           <div className="relative z-10 flex flex-col h-full">
             {/* Icon */}
-            <div className={`w-12 h-12 lg:w-14 lg:h-14 rounded-2xl bg-gradient-to-br ${service.gradient} p-3 mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
+            <div className={`w-12 h-12 lg:w-14 lg:h-14 rounded-2xl bg-gradient-to-br ${service.iconColor} p-3 mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
               <service.icon className="w-full h-full text-white" />
             </div>
-            
+
             {/* Content */}
             <div className="flex-grow">
-              <h3 className="text-lg lg:text-xl font-bold text-black mb-3 group-hover:text-orange-500 transition-colors duration-300">
+              <h3 className="text-lg lg:text-xl font-bold text-black mb-3 group-hover:text-blue-700 transition-colors duration-300">
                 {service.title}
               </h3>
-              
+
               <p className="text-gray-800 text-sm lg:text-base mb-6 leading-relaxed line-clamp-3">
                 {service.description}
               </p>
-              
+
               {/* Features */}
               <div className="space-y-2 mb-6">
                 {service.features.map((feature, featureIndex) => (
@@ -70,7 +73,7 @@ export default function Cards() {
                 ))}
               </div>
             </div>
-            
+
             {/* Footer */}
             <div className="pt-4 border-t border-white/10">
               <button className={`w-full bg-gradient-to-r ${service.gradient} text-white py-3 px-4 rounded-full font-semibold text-sm lg:text-base hover:shadow-lg hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2 group-hover:shadow-xl`}>
@@ -79,7 +82,7 @@ export default function Cards() {
               </button>
             </div>
           </div>
-          
+
           {/* Shine Effect */}
           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out"></div>
         </div>

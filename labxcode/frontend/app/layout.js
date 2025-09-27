@@ -1,17 +1,17 @@
-import { Carattere } from "next/font/google";
+import { Montserrat } from "next/font/google";
 import "./globals.css";
 import Navbar from "./_components/Navbar";
 import Footer from "./_components/Footer";
 
-const carattere = Carattere({
+const montserrat = Montserrat({
   subsets: ["latin"],
-  variable: "--font-condiment",
+  variable: "--font-montserrat",
   weight: "400",
 });
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={carattere.variable}>
+    <html lang="en" className={montserrat.variable}>
       <body>
         <Navbar />
         {children}

@@ -3,10 +3,10 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
-  --font-condiment: 'Condiment', cursive;
+  --font-condiment: 'Montserrat', cursive;
 }
 
 body {
-  font-family: var(--font-condiment);
+  font-family: var(--font-Montserrat);
 }
 

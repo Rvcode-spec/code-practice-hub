@@ -92,18 +92,18 @@ export default function AboutPage() {
       </div>
 
       {/* Why Choose Us Section */}
-      <div className="bg-black   py-20">
+      <div className="   bg-gradient-to-r to-green-700/80  from-blue-900 py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-orange-400 mb-6">Why Choose LabXCode?</h2>
+            <h2 className="text-4xl font-bold text-white mb-6">Why Choose LabXCode?</h2>
             <p className="text-xl text-gray-300">What makes us different</p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {features.map((feature, index) => (
               <div key={index} className="text-center group">
-                <div className="bg-gradient-to-r from-blue-500 to-purple-500 w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
-                  <div className="text-white">{feature.icon}</div>
+                <div className="bg-white w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <div className="text-blue-900">{feature.icon}</div>
                 </div>
                 <h3 className="text-lg font-semibold text-white mb-3">{feature.title}</h3>
                 <p className="text-gray-300 text-sm leading-relaxed">{feature.description}</p>
